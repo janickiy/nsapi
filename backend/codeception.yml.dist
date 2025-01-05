@@ -1,0 +1,23 @@
+namespace: backend\tests
+actor_suffix: Tester
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+    enabled:
+        - Db
+    config:
+        Yii2:
+            configFile: 'config/test-local.php'
+        Db:
+            dsn: 'config db dsn'
+            user: 'config db user'
+            password: 'config db password'
+            populate: false
+            cleanup: true

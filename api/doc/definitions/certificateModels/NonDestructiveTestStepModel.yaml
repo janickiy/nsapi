@@ -1,0 +1,99 @@
+type: object
+properties:
+  cross_seams_roll_ends:
+    type: object
+    description: Поперечные швы концов рулонов
+    properties:
+      method_1:
+        type: object
+        properties:
+          control_method_id:
+            type: integer
+            description: Метод контроля
+          nd_control_method_id:
+            type: integer
+            description: НД на метод контроля
+          control_result_id:
+            type: integer
+            description: Результат контроля
+          note:
+            type: string
+            description: Сноска для метода контроля
+      method_2:
+        type: object
+        properties:
+          control_method_id:
+            type: integer
+            description: Метод контроля
+          nd_control_method_id:
+            type: integer
+            description: НД на метод контроля
+          control_result_id:
+            type: integer
+            description: Результат контроля
+          note:
+            type: string
+            description: Сноска для метода контроля
+      method_3:
+        type: object
+        properties:
+          control_method_id:
+            type: integer
+            description: Метод контроля
+          nd_control_method_id:
+            type: integer
+            description: НД на метод контроля
+          control_result_id:
+            type: integer
+            description: Результат контроля
+          note:
+            type: string
+            description: Сноска для метода контроля
+  longitudinal_seams:
+    type: object
+    description: Продольные швы ГНКТ
+    properties:
+      control_method_id:
+        type: integer
+        description: Метод контроля
+      nd_control_method_id:
+        type: integer
+        description: НД на метод контроля
+      control_result_id:
+        type: integer
+        description: Результат контроля
+      note:
+        type: string
+        description: Сноска для метода контроля
+  base_metal:
+    type: object
+    description: Основной металл ГНКТ
+    properties:
+      control_method_id:
+        type: integer
+        description: Метод контроля
+      nd_control_method_id:
+        type: integer
+        description: НД на метод контроля
+      control_result_id:
+        type: integer
+        description: Результат контроля
+      note:
+        type: string
+        description: Сноска для метода контроля
+  circular_corner_seam:
+    type: object
+    description: Кольцевой кгловой шов
+    properties:
+      control_method_id:
+        type: integer
+        description: Метод контроля
+      nd_control_method_id:
+        type: integer
+        description: НД на метод контроля
+      control_result_id:
+        type: integer
+        description: Результат контроля
+      note:
+        type: string
+        description: Сноска для метода контроля

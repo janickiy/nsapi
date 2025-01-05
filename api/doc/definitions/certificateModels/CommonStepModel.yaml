@@ -1,0 +1,70 @@
+type: object
+required:
+  - id
+  - number
+  - number_tube
+  - created_at
+properties:
+  id:
+    type: integer
+    description: Иденатификатор сертификата
+  number:
+    type: string
+    description: Номер документа
+  number_tube:
+    type: string
+    description: Номер трубы
+  rfid:
+    type: string
+    description: RFID метка
+  created_at:
+    type: string
+    description: Дата создания
+  product_type:
+    type: string
+    description: Вид изделия
+  standard_id:
+    type: integer
+    description: Идентификатор стандарта
+  hardness_id:
+    type: integer
+    description: Идентификатор группы прочности
+  outer_diameter_id:
+    type: integer
+    description: Идентификатор внешнего диаметра
+  agreement_delivery:
+    type: string
+    description: Договор поставки
+  type_heat_treatment:
+    type: string
+    description: Вид термической обработки
+  type_quick_connection:
+    type: string
+    description: Тип быстросъемного соединения
+  type_quick_connection_note:
+    type: string
+    description: Сноска для типа быстросъемного соединения
+  result_hydrostatic_test:
+    type: string
+    description: Результат гидростатических испытаний
+  brand_geophysical_cable:
+    type: string
+    description: Марка геофизического кабеля
+  brand_geophysical_cable_note:
+    type: string
+    description: Сноска для типа марки геофизического кабеля
+  length_geophysical_cable:
+    type: number
+    description: Длина геофизического кабеля
+  length_geophysical_cable_note:
+    type: string
+    description: Сноска для длины геофизического кабеля
+  customer:
+    type: string
+    description: Покупатель
+  test_pressure:
+    type: number
+    description: Испытательное давление
+  theoretical_mass:
+    type: number
+    description: Теоретическая масса

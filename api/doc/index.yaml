@@ -1,0 +1,43 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Документация для api
+  contact:
+    name: adminfmq@freematiq.com
+basePath: /api
+paths:
+  - $ref: ./paths/user.yaml
+  - $ref: ./paths/references.yaml
+  - $ref: ./paths/certificateCommonStep.yaml
+  - $ref: ./paths/nonDestructiveTestStep.yaml
+  - $ref: ./paths/meldStep.yaml
+  - $ref: ./paths/rollStep.yaml
+  - $ref: ./paths/rollSortStep.yaml
+  - $ref: ./paths/detailTubeStep.yaml
+  - $ref: ./paths/cylinderStep.yaml
+  - $ref: ./paths/noteStep.yaml
+  - $ref: ./paths/signatureStep.yaml
+  - $ref: ./paths/certificatesViews.yaml
+definitions:
+  CommonRequestError:
+    $ref: './definitions/ErrorsResponse.yaml'
+components:
+  parameters:
+    PerPage:
+      name: per-page
+      in: query
+      type: integer
+      required: false
+      description: Количество элементов на страницу
+    Page:
+      name: page
+      in: query
+      type: integer
+      required: false
+      description: Номер страницы
+    Sort:
+      name: sort
+      in: query
+      type: string
+      required: false
+      description: Cписок полей для сортировки, через ',' (sort={filed1},-{field2})

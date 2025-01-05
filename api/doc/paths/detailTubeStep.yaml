@@ -1,0 +1,65 @@
+/certificate/{id}/detail-tube:
+  get:
+    tags:
+      - View Certificate
+    summary: DetailTube
+    description: Сохраненные детальные параметры трубы
+    operationId: detail_tube
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/DetailTubeModel.yaml'
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: DetailTubeUpdate
+    description: Сохранение детальных параметров трубы
+    operationId: detail_tube_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/DetailTubeStep.yaml'
+    responses:
+      '200':
+          $ref: '../definitions/EmptyResponse.yaml'
+/certificate/{idCertificate}/wall-thickness-info/{id}:
+  get:
+    tags:
+      - View Certificate
+    summary: WallThicknessInfo
+    description: Параметры толщины стенки
+    operationId: wall-thickness-info
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: id
+        description: Идентификатор толщины стенки
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/WallThicknessInfoModel.yaml'

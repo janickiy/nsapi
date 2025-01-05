@@ -1,0 +1,14 @@
+type: object
+required:
+  - id
+  - name
+  - value
+properties:
+  id:
+    type: integer
+  name:
+    description: Текстовое название
+    type: string
+  value:
+    description: Значение
+    type: number

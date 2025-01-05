@@ -1,0 +1,16 @@
+version: '2'
+services:
+  nginx:
+    environment:
+      SERVER_NAME: baseapp.ru
+    volumes:
+      - '/opt/nginx-ssl:/opt/gninx-ssl'
+  postgres:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: baseapp
+  rabbitmq:
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

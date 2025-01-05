@@ -1,0 +1,23 @@
+type: object
+required:
+  - id
+  - name
+  - nd_control_method
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  nd_control_method:
+    type: array
+    description: Массив НД на метод контроля
+    items:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string

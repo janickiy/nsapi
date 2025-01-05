@@ -1,0 +1,12 @@
+X-Pagination-Total-Count:
+  type: integer
+  description: Общее количество элементов списка
+X-Pagination-Page-Count:
+  type: integer
+  description: Общее количество страниц
+X-Pagination-Current-Page:
+  type: integer
+  description: Текущая страница
+X-Pagination-Per-Page:
+  type: integer
+  description: Количество элементов на странице

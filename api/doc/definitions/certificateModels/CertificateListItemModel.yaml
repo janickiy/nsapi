@@ -1,0 +1,38 @@
+type: object
+required:
+  - id
+  - number
+  - number_tube
+  - created_at
+  - rfid
+  - status
+properties:
+  id:
+    type: integer
+    description: Идентификатор сертификата
+  number:
+    type: string
+    description: Номер документа
+  number_tube:
+    type: string
+    description: Номер трубы
+  rfid:
+    type: string
+    description: RFID метка
+  product_type:
+    type: string
+    description: Вид изделия
+  created_at:
+    type: string
+    description: Дата создания
+  status:
+    type: object
+    description: Статус сертификата
+    required:
+      - id
+      - name
+    properties:
+      id:
+        type: string
+      name:
+        type: string

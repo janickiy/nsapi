@@ -1,0 +1,10 @@
+suite_namespace: backend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://baseapp-test.local
+            browser: chrome
+            restart: true
+        - Yii2:
+            part: init

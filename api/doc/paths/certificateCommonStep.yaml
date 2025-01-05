@@ -1,0 +1,170 @@
+/certificate/{id}:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateCommonFields
+    description: Список сохраненных полей основных параметров
+    operationId: certificate_common_fields
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/CommonStepModel.yaml'
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateCommonUpdate
+    description: Обновление основных параметров
+    operationId: certificate_common_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/CommonStep.yaml'
+    responses:
+      '200':
+          $ref: '../definitions/EmptyResponse.yaml'
+  delete:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateDelete
+    description: Удаление сертификата
+    operationId: certificate_delete
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate:
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CreateCertificate
+    description: Создание сертификата
+    operationId: create_certificate
+    produces:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/CommonStep.yaml'
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+
+/certificate/{id}/restore:
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateRestore
+    description: Восстановление сертификата (в черновики)
+    operationId: certificate_restore
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate/{id}/refund:
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateRefund
+    description: Возвращение сертификата на доработку
+    operationId: certificate_refund
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate/{id}/approve:
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateApprove
+    description: Отправка на согласование/Ввод в эксплуатацию
+    operationId: certificate_approve
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate/{id}/copy:
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CertificateCopy
+    description: Копирование сертификата
+    operationId: certificate_copy
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/CommonStep.yaml'
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer

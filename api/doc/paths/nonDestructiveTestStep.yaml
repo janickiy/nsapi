@@ -1,0 +1,41 @@
+/certificate/{id}/non-destructive-test:
+  get:
+    tags:
+      - View Certificate
+    summary: NonDestructiveTestFields
+    description: Сохраненные параметры неразрушающего контроля
+    operationId: non_destructive_test_fields
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/NonDestructiveTestStepModel.yaml'
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: NonDestructiveTestUpdate
+    description: Сохранение параметров неразрушающего контроля
+    operationId: non_destructive_test_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/NonDestructiveTestStep.yaml'
+    responses:
+      '200':
+          $ref: '../definitions/EmptyResponse.yaml'

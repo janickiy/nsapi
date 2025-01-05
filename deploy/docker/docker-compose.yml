@@ -1,0 +1,101 @@
+version: '2'
+services:
+  postgres:
+    image: freematiq/postgres:latest
+    container_name: postgres
+    restart: always
+    volumes:
+      - '../../.././db:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: baseapp
+    command: postgres -c 'datestyle=iso,dmy'
+  php:
+    image: freematiq/php_7.3:latest
+    container_name: php
+    restart: always
+    working_dir: /opt/project
+    volumes:
+      - '../../.././project:/opt/project'
+      - './php.ini:/etc/php/7.3/fpm/php.ini:ro'
+    depends_on:
+      - postgres
+      - rabbitmq
+    links:
+      - postgres
+      - rabbitmq
+    extra_hosts:
+      - 'gitlab.freematiq.com:46.4.155.93'
+  nginx:
+    image: freematiq/nginx:latest
+    # C генератором сертов SSL сертботом через cloudflare
+    #image: hub.freematiq.com/freematiq_nginx_certbot_cloudflare_1.15
+    container_name: nginx
+    restart: always
+    volumes:
+      - '../../.././project:/opt/project:ro'
+      - '../../.././logs:/opt/logs'
+      - './nginx.conf:/etc/nginx/conf.d/default.template:ro'
+      - './disallow-robots.txt:/etc/nginx/conf.d/disallow-robots.txt:ro'
+      # Необходимо для freematiq/freematiq_nginx_certbot_cloudflare
+      #- './cloudflare.ini:/root/.secrets/certbot/cloudflare.ini'
+    environment:
+      SERVER_NAME: 'baseapp.local'
+      IS_TEST: '1'
+      # Необходимо для freematiq/nginx_certbot_cloudflare
+      #CLOUDFLARE_EMAIL: 'email@cloudflare.com'
+    depends_on:
+      - php
+    links:
+      - php
+    ports:
+      - 80:80
+      - 443:443
+  rabbitmq:
+    image: freematiq/rabbitmq:latest
+    container_name: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - 15672:15672
+  worker_send_mail:
+    image: freematiq/php_7.3:latest
+    container_name: worker_send_mail
+    restart: always
+    working_dir: /opt/project
+    volumes:
+      - '../../.././project:/opt/project'
+    depends_on:
+      - postgres
+      - rabbitmq
+    links:
+      - postgres
+      - rabbitmq
+    command:
+      php /opt/project/yii mailnotify-queue/listen
+  cron_clear_temp:
+    image: freematiq/docker:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: cron_clear_temp
+    depends_on:
+      - php
+    command: >
+      sh -c "
+      echo '0 * * * * docker exec php php yii clear-temp/index' > /etc/crontabs/root
+      && crond -f"
+  # Автообновление сертификатов SSL
+  #cron_certbot_renew:
+  #  image: freematiq/docker:latest
+  #  restart: always
+  #  volumes:
+  #    - /var/run/docker.sock:/var/run/docker.sock
+  #  container_name: cron_certbot_renew
+  #  command: >
+  #    sh -c "
+  #    echo '0 0 * * 0 docker exec nginx certbot renew --renew-hook \"service nginx reload\"' > /etc/crontabs/root
+  #    && crond -f"

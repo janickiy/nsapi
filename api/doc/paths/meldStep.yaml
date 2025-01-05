@@ -1,0 +1,90 @@
+/certificate/{idCertificate}/meld:
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CreateMeld
+    description: Добавление плавки
+    operationId: create_meld
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - number
+          properties:
+            number:
+              type: string
+              description: Номер плавки
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              description: Идентификатор плавки
+            chemical_c_max:
+              type: number
+              description: Максимальная массовая доля углерода, %
+            chemical_mn_max:
+              type: number
+              description: Максимальная массовая доля марганца, %
+            chemical_si_max:
+              type: number
+              description: Максимальная массовая доля кремния, %
+            chemical_s_max:
+              type: number
+              description: Максимальная массовая доля серы, %
+            chemical_p_max:
+              type: number
+              description: Максимальная массовая доля фосфора, %
+            dirty_type_a_max:
+              type: number
+              description: Максимальное значение степени загрязненности Тип A
+            dirty_type_b_max:
+              type: number
+              description: Максимальное значение степени загрязненности Тип B
+            dirty_type_c_max:
+              type: number
+              description: Максимальное значение степени загрязненности Тип C
+            dirty_type_d_max:
+              type: number
+              description: Максимальное значение степени загрязненности Тип D
+            dirty_type_ds_max:
+              type: number
+              description: Максимальное значение степени загрязненности Тип DS
+
+/certificate/{idCertificate}/meld/{idMeld}:
+  delete:
+    tags:
+      - Create/Edit Certificate
+    summary: DeleteMeld
+    description: Удаление плавки
+    operationId: delete_meld
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: idMeld
+        description: Идентификатор плавки
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'

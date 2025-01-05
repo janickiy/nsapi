@@ -1,0 +1,85 @@
+/certificate/{idCertificate}/{idMeld}/roll:
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CreateRoll
+    description: Добавление рулона
+    operationId: create_roll
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: idMeld
+        description: Идентификатор плавки
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - number
+          properties:
+            number:
+              type: string
+              description: Номер рулона
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              description: Идентификатор рулона
+            serial_number:
+              type: integer
+              description: Порядковый номер
+            grain_size_max:
+              type: number
+              description: Максимальный размер зерна
+            hardness_om_max:
+              type: number
+              description: Максимальная твердтость OM
+            hardness_ssh_max:
+              type: number
+              description: Максимальная твердтость СШ
+            hardness_ztv_max:
+              type: number
+              description: Максимальная твердтость ЗТВ
+
+/certificate/{idCertificate}/{idMeld}/roll/{idRoll}:
+  delete:
+    tags:
+      - Create/Edit Certificate
+    summary: DeleteRoll
+    description: Удаление Рулона
+    operationId: delete_roll
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: idMeld
+        description: Идентификатор плавки
+        type: integer
+        required: true
+      - in: path
+        name: idRoll
+        description: Идентификатор рулона
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'

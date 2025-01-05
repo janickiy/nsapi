@@ -1,0 +1,43 @@
+type: object
+properties:
+  sekv:
+    type: number
+    description: СЭКВ
+  sekv_note:
+    type: string
+    description: Сноска для СЭКВ
+  chemical_c:
+    type: number
+    description: Химический состав углерод C, %
+  chemical_mn:
+    type: number
+    description: Химический состав марганец Mn, %
+  chemical_si:
+    type: number
+    description: Химический состав кремний Si, %
+  chemical_s:
+    type: number
+    description: Химический состав сера S, %
+  chemical_p:
+    type: number
+    description: Химический состав фосфор P, %
+  dirty_type_a:
+    type: number
+    description: Степень загрязненности Тип A
+  dirty_type_b:
+    type: number
+    description: Степень загрязненности Тип B
+  dirty_type_c:
+    type: number
+    description: Степень загрязненности Тип C
+  dirty_type_d:
+    type: number
+    description: Степень загрязненности Тип D
+  dirty_type_ds:
+    type: number
+    description: Степень загрязненности Тип DS
+  rolls:
+    type: object
+    description: Рулоны (в качестве ключа - идентификатор рулона)
+    additionalProperties:
+      $ref: './RollRequest.yaml'

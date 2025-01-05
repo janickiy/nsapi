@@ -1,0 +1,20 @@
+type: object
+properties:
+  material:
+    type: string
+    description: Материал
+  weight:
+    type: number
+    description: Масса
+  diameter_core:
+    type: number
+    description: Диаметр сердечника
+  diameter_cheek:
+    type: number
+    description: Диаметр щек
+  width:
+    type: number
+    description: Ширина
+  mark_nitrogen:
+    type: string
+    description: Отметка о заполнении азотом

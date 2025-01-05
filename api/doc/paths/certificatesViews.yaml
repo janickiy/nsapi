@@ -1,0 +1,308 @@
+/certificate/draft:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateDraftList
+    description: Список черновиков
+    operationId: certificate_draft_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: search_string
+        description: Поиск по различным полям сертификата
+        type: string
+        required: false
+      - in: query
+        name: number
+        description: Поиск по номеру документа
+        type: string
+        required: false
+      - in: query
+        name: number_tube
+        description: Поиск по номеру трубы
+        type: string
+        required: false
+      - in: query
+        name: rfid
+        description: Поиск по RFID метке
+        type: string
+        required: false
+      - in: query
+        name: outer_diameter_id
+        description: Поиск по внешнему диаметру (нужен идентификатор из справочника)
+        type: integer
+        required: false
+      - in: query
+        name: created_at
+        description: Поиск по дате создания (дата в формате dd.mm.yyyy)
+        type: string
+        required: false
+      - in: query
+        name: length_min
+        description: Поиск по минимальной длине
+        type: number
+        required: false
+      - in: query
+        name: length_max
+        description: Поиск по максимальной длине
+        type: number
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/certificateModels/CertificateListItemModel.yaml'
+
+/certificate/published:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificatePublishedList
+    description: Список опубликованных сертификатов
+    operationId: certificate_published_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: search_string
+        description: Поиск по различным полям сертификата
+        type: string
+        required: false
+      - in: query
+        name: number
+        description: Поиск по номеру документа
+        type: string
+        required: false
+      - in: query
+        name: number_tube
+        description: Поиск по номеру трубы
+        type: string
+        required: false
+      - in: query
+        name: rfid
+        description: Поиск по RFID метке
+        type: string
+        required: false
+      - in: query
+        name: outer_diameter_id
+        description: Поиск по внешнему диаметру (нужен идентификатор из справочника)
+        type: integer
+        required: false
+      - in: query
+        name: created_at
+        description: Поиск по дате создания (дата в формате dd.mm.yyyy)
+        type: string
+        required: false
+      - in: query
+        name: length_min
+        description: Поиск по минимальной длине
+        type: number
+        required: false
+      - in: query
+        name: length_max
+        description: Поиск по максимальной длине
+        type: number
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/certificateModels/CertificateListItemModel.yaml'
+
+/certificate/deleted:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateDeletedList
+    description: Список удаленных сертификатов
+    operationId: certificate_deleted_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: search_string
+        description: Поиск по различным полям сертификата
+        type: string
+        required: false
+      - in: query
+        name: number
+        description: Поиск по номеру документа
+        type: string
+        required: false
+      - in: query
+        name: number_tube
+        description: Поиск по номеру трубы
+        type: string
+        required: false
+      - in: query
+        name: rfid
+        description: Поиск по RFID метке
+        type: string
+        required: false
+      - in: query
+        name: outer_diameter_id
+        description: Поиск по внешнему диаметру (нужен идентификатор из справочника)
+        type: integer
+        required: false
+      - in: query
+        name: created_at
+        description: Поиск по дате создания (дата в формате dd.mm.yyyy)
+        type: string
+        required: false
+      - in: query
+        name: length_min
+        description: Поиск по минимальной длине
+        type: number
+        required: false
+      - in: query
+        name: length_max
+        description: Поиск по максимальной длине
+        type: number
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/certificateModels/CertificateListItemModel.yaml'
+
+/certificate/approve:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateApproveList
+    description: Список сертификатов на согласовании
+    operationId: certificate_approve_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: search_string
+        description: Поиск по различным полям сертификата
+        type: string
+        required: false
+      - in: query
+        name: number
+        description: Поиск по номеру документа
+        type: string
+        required: false
+      - in: query
+        name: number_tube
+        description: Поиск по номеру трубы
+        type: string
+        required: false
+      - in: query
+        name: rfid
+        description: Поиск по RFID метке
+        type: string
+        required: false
+      - in: query
+        name: outer_diameter_id
+        description: Поиск по внешнему диаметру (нужен идентификатор из справочника)
+        type: integer
+        required: false
+      - in: query
+        name: created_at
+        description: Поиск по дате создания (дата в формате dd.mm.yyyy)
+        type: string
+        required: false
+      - in: query
+        name: length_min
+        description: Поиск по минимальной длине
+        type: number
+        required: false
+      - in: query
+        name: length_max
+        description: Поиск по максимальной длине
+        type: number
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/certificateModels/CertificateListItemModel.yaml'
+
+/certificate/{id}/download:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateDownload
+    description: Скачать файл сертификата
+    operationId: certificate_download
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        description: A XLS file
+        content:
+          application/vnd.ms-excel:
+            schema:
+              type: string
+              format: binary
+
+/certificate/{id}/all-fields:
+  get:
+    tags:
+      - View Certificate
+    summary: CertificateAllFields
+    description: Все поля сертификата
+    operationId: certificate_all_fields
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          type: object
+          properties:
+            'commonStep':
+              $ref: '../definitions/certificateModels/CommonStepModel.yaml'
+            'nonDestructiveTestsStep':
+              $ref: '../definitions/certificateModels/NonDestructiveTestStepModel.yaml'
+            'detailTubeStep':
+              $ref: '../definitions/certificateModels/DetailTubeModel.yaml'
+            'cylinderStep':
+              $ref: '../definitions/certificateModels/CylinderModel.yaml'
+            'notesStep':
+              type: object
+              additionalProperties:
+                $ref: '../definitions/certificateModels/NoteModel.yaml'
+            'signaturesStep':
+              type: object
+              additionalProperties:
+                $ref: '../definitions/certificateModels/SignatureModel.yaml'

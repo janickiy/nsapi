@@ -1,0 +1,37 @@
+includes:
+  - ../../../vendor/proget-hq/phpstan-yii2/extension.neon
+parameters:
+  level: 8
+  checkMissingIterableValueType: false
+  paths:
+    - ../../../api
+    - ../../../backend
+    - ../../../common
+    - ../../../console
+    - ../../../frontend
+  excludePaths:
+    - ../../../api/config
+    - ../../../api/doc
+    - ../../../api/runtime
+    - ../../../api/tests
+    - ../../../api/web
+    - ../../../backend/config
+    - ../../../backend/runtime
+    - ../../../backend/tests
+    - ../../../backend/web
+    - ../../../common/config
+    - ../../../common/fixtures
+    - ../../../common/runtime
+    - ../../../common/tests
+    - ../../../console/config
+    - ../../../console/runtime
+    - ../../../frontend/config
+    - ../../../frontend/runtime
+    - ../../../frontend/tests
+    - ../../../frontend/web
+  scanFiles:
+    - ../../../vendor/yiisoft/yii2/Yii.php
+    - ../../../vendor/quartz/yii2-utilities/plug-site.php
+    - ../../../vendor/quartz/yii2-utilities/cloudflare-api.php
+  yii2:
+    config_path: %rootDir%/../../../common/config/main.php

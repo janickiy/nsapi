@@ -1,0 +1,65 @@
+type: object
+properties:
+  wall_thickness_id:
+    type: integer
+    description: Идентификатор толщины стенки
+  length:
+    type: number
+    description: Длина рулона
+  location_seams_note:
+    type: string
+    description: Сноска для расположения поперечных швов
+  grain_size:
+    type: number
+    description: Размер зерна
+  hardness_note:
+    type: string
+    description: Сноска для твердости
+  is_exact_hardness_om:
+    type: boolean
+    description: Точное или нет значение твердтости OM
+  hardness_om:
+    type: number
+    description: Твердтость OM
+  is_exact_hardness_ssh:
+    type: boolean
+    description: Точное или нет значение твердтости СШ
+  hardness_ssh:
+    type: number
+    description: Твердтость СШ
+  is_exact_hardness_ztv:
+    type: boolean
+    description: Точное или нет значение твердтости ЗТВ
+  hardness_ztv:
+    type: number
+    description: Твердтость ЗТВ
+  is_use_note:
+    type: boolean
+    description: Использовать сноску
+  is_fill_testing:
+    type: boolean
+    description: Заполнены результаты тестирования
+  absorbed_energy_1:
+    type: number
+    description: Поглощенная энергия образец 1
+  absorbed_energy_2:
+    type: number
+    description: Поглощенная энергия образец 2
+  absorbed_energy_3:
+    type: number
+    description: Поглощенная энергия образец 3
+  fluidity:
+    type: number
+    description: Предел текучести
+  fluidity_note:
+    type: string
+    description: Сноска для предела текучести
+  strength:
+    type: number
+    description: Предел прочности
+  relative_extension:
+    type: number
+    description: Относительное удлинение
+  relative_extension_note:
+    type: string
+    description: Сноска для относительного удлинения

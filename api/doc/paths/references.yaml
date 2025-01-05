@@ -1,0 +1,183 @@
+/references/standard:
+  get:
+    tags:
+      - References
+    summary: StandardList
+    description: Справочник стандартов
+    operationId: standard_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: name
+        description: Фильтр по названию
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/standard.yaml'
+
+/references/hardness:
+  get:
+    tags:
+      - References
+    summary: HardnessList
+    description: Справочник групп прочности
+    operationId: hardness_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: name
+        description: Фильтр по названию
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/hardness.yaml'
+
+/references/outer-diameter:
+  get:
+    tags:
+      - References
+    summary: OuterDiameterList
+    description: Справочник внешних диаметров
+    operationId: outer_diameter_list
+    produces:
+      - application/json
+    parameters:
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/outerDiameter.yaml'
+
+/references/customer:
+  get:
+    tags:
+      - References
+    summary: CustomerList
+    description: Справочник полкупателей
+    operationId: customer_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: name
+        description: Фильтр по названию
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/customer.yaml'
+
+/references/control-method:
+  get:
+    tags:
+      - References
+    summary: ControlMethodList
+    description: Справочник методов контроля
+    operationId: control_method_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: name
+        description: Фильтр по названию
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/controlMethod.yaml'
+
+/references/control-result:
+  get:
+    tags:
+      - References
+    summary: ControlResultList
+    description: Справочник результатов контроля
+    operationId: control_result_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: text
+        description: Фильтр по тексту
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/controlResult.yaml'
+
+/references/wall-thickness:
+  get:
+    tags:
+      - References
+    summary: WallThicknessList
+    description: Справочник толщин стенки
+    operationId: wall_thickness_list
+    produces:
+      - application/json
+    parameters:
+      - in: query
+        name: name
+        description: Фильтр по названию
+        type: string
+        required: false
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Sort'
+    responses:
+      '200':
+        headers:
+          $ref: '../definitions/PaginatorHeader.yaml'
+        schema:
+          type: array
+          items:
+            $ref: '../definitions/referenceModels/wallThickness.yaml'

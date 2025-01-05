@@ -1,0 +1,18 @@
+type: object
+required:
+  - id
+  - name
+  - millimeter
+  - inch
+properties:
+  id:
+    type: integer
+  name:
+    description: Текстовое название
+    type: string
+  millimeter:
+    description: Диаметр в миллиметрах
+    type: number
+  inch:
+    description: Диаметр в дюймах
+    type: number

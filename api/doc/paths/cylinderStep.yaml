@@ -1,0 +1,41 @@
+/certificate/{id}/cylinder:
+  get:
+    tags:
+      - View Certificate
+    summary: Cylinder
+    description: Сохраненные параметры барабана
+    operationId: cylinder
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/CylinderModel.yaml'
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: CylinderUpdate
+    description: Сохранение параметров барабана
+    operationId: cylinder_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '../definitions/requestModels/CylinderRequest.yaml'
+    responses:
+      '200':
+          $ref: '../definitions/EmptyResponse.yaml'

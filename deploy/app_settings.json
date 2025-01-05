@@ -1,0 +1,493 @@
+{
+    "ADMINDEFAULT": {
+        "login": {
+            "name": "Логин",
+            "value": "admin"
+        },
+        "password": {
+            "name": "Пароль",
+            "value": "passw0rd"
+        }
+    },
+    "MIGRATIONS": [
+        "@vendor/quartz/yii2-rbac/migrations",
+        "@vendor/quartz/yii2-settings-module/migrations",
+        "@vendor/quartz/yii2-user/migrations",
+        "@vendor/quartz/yii2-mailnotify/migrations",
+        "@vendor/quartz/yii2-localization/migrations",
+        "@vendor/quartz/yii2-adminlte-theme/migrations",
+        "@vendor/quartz/yii2-fileapi-widget/migrations",
+        "@vendor/quartz/yii2-multiple-upload/migrations",
+        "@vendor/quartz/yii2-dashboard/migrations"
+    ],
+    "NAMESPACED_MIGRATIONS": [
+        "kartik\\dynagrid\\migrations"
+    ],
+    "EXTENSIONS": {
+        "php_userinfo": {
+            "name": "Пользователь php",
+            "scope": "USER",
+            "conditions": [
+                "PHPUserinfo"
+            ]
+        },
+        "php": {
+            "name": "Версия PHP",
+            "conditions": {
+                "ExtensionVersion": {
+                    "require": "5.6.0 и выше",
+                    "params": {
+                        "version": "5.6.0"
+                    }
+                }
+            }
+        },
+        "imagick": {
+            "name": "Imagick extension",
+            "conditions": {
+                "ImagickExtension": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "pdo": {
+            "name": "PDO extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            },
+            "memo": "Общий компонент для работы с базами данных"
+        },
+        "pdo_pgsql": {
+            "name": "PDO PostgreSQL",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            },
+            "memo": "Компонент для работы с базами данных postgres"
+        },
+        "xmlreader": {
+            "name": "xmlreader extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "mbstring": {
+            "name": "mbstring extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "xmlrpc": {
+            "name": "xmlrpc extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "ctype": {
+            "name": "ctype extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "curl": {
+            "name": "CURL extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "intl": {
+            "name": "INTL extension",
+            "conditions": {
+                "ExtensionLoaded": {
+                    "require": "Установлено"
+                }
+            }
+        },
+        "allow_url_include": {
+            "name": "PHP allow url include",
+            "conditions": {
+                "PhpIniOff": {
+                    "typeError": "WARNING",
+                    "require": "Выключено"
+                }
+            }
+        }
+    },
+    "PARAMS": {
+        "db": {
+            "name": "База данных",
+            "memo": "Параметры подключения к базе данных",
+            "conditions": {
+                "DBExtension": {
+                    "params": [
+                        "pg_trgm"
+                    ]
+                }
+            },
+            "public_params": {
+                "login": {
+                    "name": "Логин",
+                    "memo": "Пользователь базы данных",
+                    "type": "string",
+                    "defaultValue": "postgres",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "password": {
+                    "name": "Пароль",
+                    "memo": "Пароль пользователя базы данных",
+                    "type": "password",
+                    "defaultValue": "postgres",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "host": {
+                    "name": "Хост",
+                    "memo": "Адрес сервера базы данных",
+                    "type": "string",
+                    "defaultValue": "localhost",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "dbname": {
+                    "name": "База данных",
+                    "memo": "Название базы данных",
+                    "type": "string",
+                    "defaultValue": "postgres",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "test-dbname": {
+                    "name": "База данных",
+                    "memo": "Название базы данных",
+                    "type": "string",
+                    "defaultValue": "postgres-test",
+                    "conditions": [
+                        "Required"
+                    ]
+                }
+            },
+            "private_params": {
+                "class": {
+                    "value": "yii\\db\\Connection",
+                    "name": "Класс для работы с БД"
+                },
+                "schemaCache": {
+                    "value": "cache",
+                    "name": ""
+                },
+                "charset": {
+                    "value": "utf8",
+                    "name": "Кодировка БД"
+                }
+            }
+        },
+        "capcha": {
+            "name": "Настройка Capcha",
+            "memo": "<a class='u_hover' target='_blank' href='https://developers.google.com/recaptcha/docs/start'><u>Зарегиструйтесь в google и настройте capcha на ваш домен</u> <i class='fa fa-external-link'></i></a>",
+            "conditions": {
+                "reCapcha": {
+                    "scope": "USER"
+                }
+            },
+            "public_params": {
+                "reCapchaSecret": {
+                    "name": "reCapchaSecret",
+                    "memo": "reCapchaSecret",
+                    "type": "string",
+                    "defaultValue": "",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "reCapchaSiteKey": {
+                    "name": "reCapchaSiteKey",
+                    "memo": "reCapchaSiteKey",
+                    "type": "string",
+                    "defaultValue": "",
+                    "conditions": [
+                        "Required"
+                    ]
+                }
+            }
+        },
+        "mail": {
+            "name": "Почта",
+            "memo": "Параметры почтового сервера",
+            "conditions": [
+                "Mail"
+            ],
+            "public_params": {
+                "host": {
+                    "name": "Адрес сервера",
+                    "memo": "Адрес smtp сервера",
+                    "type": "string",
+                    "defaultValue": "127.0.0.1",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "username": {
+                    "name": "Имя пользователя",
+                    "memo": "Пользователь для почты (если необходимо)",
+                    "type": "string",
+                    "defaultValue": ""
+                },
+                "password": {
+                    "name": "Пароль",
+                    "memo": "Пароль пользователя (если необходимо)",
+                    "type": "password",
+                    "defaultValue": ""
+                },
+                "port": {
+                    "name": "Порт",
+                    "memo": "Порт smtp сервера",
+                    "type": "integer",
+                    "defaultValue": 25
+                },
+                "encryption": {
+                    "name": "Шифрование",
+                    "memo": "Шифрование (если необходимо)",
+                    "type": "string",
+                    "defaultValue": "ssl",
+                    "listValues": {
+                        "": "Нет шифрования",
+                        "ssl": "SSL",
+                        "tls": "TLS"
+                    }
+                }
+            },
+            "private_params": {
+                "class": {
+                    "value": "yii\\swiftmailer\\Mailer",
+                    "name": ""
+                },
+                "transport_class": {
+                    "value": "Swift_SmtpTransport",
+                    "name": ""
+                }
+            }
+        },
+        "MQ": {
+            "name": "Сервер очередей",
+            "memo": "Настройки для подключения к серверу очередей",
+            "public_params": {
+                "user": {
+                    "name": "Пользователь",
+                    "memo": "Пользователь",
+                    "type": "string",
+                    "defaultValue": "guest",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "password": {
+                    "name": "Пароль",
+                    "memo": "Пароль",
+                    "type": "string",
+                    "defaultValue": "guest",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "host": {
+                    "name": "Адрес сервера",
+                    "memo": "Адрес сервера",
+                    "type": "string",
+                    "defaultValue": "localhost",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "port": {
+                    "name": "Порт сервера",
+                    "memo": "Порт сервера",
+                    "type": "integer",
+                    "defaultValue": 5672,
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "vhost": {
+                    "name": "vhost",
+                    "memo": "vhost",
+                    "type": "string",
+                    "defaultValue": "/"
+                },
+                "prefix": {
+                    "name": "Префикс для очередей и обменников",
+                    "memo": "Префикс для очередей и обменников",
+                    "type": "string",
+                    "defaultValue": "baseapp."
+                }
+            },
+            "private_params": {
+                "send_mail": {
+                    "value": "send_mail",
+                    "name": "Очередь для отправки почты"
+                }
+            }
+        },
+        "common": {
+            "name": "Другие параметры",
+            "memo": "Остальные параметры",
+            "public_params": {
+                "adminEmail": {
+                    "name": "Почта администратора",
+                    "memo": "Почта администратора",
+                    "type": "string",
+                    "defaultValue": "admin@yoursite.com",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "supportEmail": {
+                    "name": "supportEmail",
+                    "memo": "",
+                    "type": "string",
+                    "defaultValue": "freematiqsite@yoursite.com",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "domain": {
+                    "name": "domain",
+                    "memo": "Доменное имя",
+                    "type": "string",
+                    "defaultValue": "http://base-app.local",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "test-domain": {
+                    "name": "test-domain",
+                    "memo": "Доменное имя для api тестов",
+                    "type": "string",
+                    "defaultValue": "http://base-app-test.local",
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "useHttps": {
+                    "name": "useHttps",
+                    "memo": "Используется протокол Https?",
+                    "type": "boolean",
+                    "defaultValue": false,
+                    "conditions": [
+                        "Required"
+                    ]
+                },
+                "session_lifetime": {
+                    "name": "session_lifetime",
+                    "memo": "Время жизни сессии",
+                    "type": "integer",
+                    "defaultValue": 86400
+                },
+                "needDevAssetForceCopy": {
+                    "name": "needDevAssetForceCopy",
+                    "memo": "Нужна перезапись ассетов в дев режиме?",
+                    "type": "boolean",
+                    "defaultValue": true,
+                    "conditions": [
+                        "Required"
+                    ]
+                }
+            },
+            "private_params": {
+                "dp_ips_backend": {
+                    "value": [],
+                    "type": "array",
+                    "name": "Ip адреса для доступа к debug_panel в админке"
+                },
+                "dp_ips_frontend": {
+                    "value": [],
+                    "type": "array",
+                    "name": "Ip адреса для доступа к debug_panel на сайте"
+                },
+                "siteID": {
+                    "value": "ID-BASEAPP",
+                    "type": "string",
+                    "name": "Идентификатор сайта"
+                },
+                "siteName": {
+                    "value": "BASEAPP",
+                    "name": "Название сайта"
+                },
+                "backendCookieValidationKey": {
+                    "value": "bxxxxxxx",
+                    "name": "backendCookieValidationKey"
+                },
+                "apiCookieValidationKey": {
+                    "value": "axxxxxxx",
+                    "name": "apiCookieValidationKey"
+                },
+                "localization_dir": {
+                    "value": "/upload/language",
+                    "defaultValue": "@root/upload/language",
+                    "type": "string",
+                    "conditions": [
+                        "Required"
+                    ],
+                    "name": "Путь до файлов json для переводов (от корня)"
+                },
+                "accessControlAllowOrigin": {
+                    "value": [
+                        "http://localhost:3000"
+                    ],
+                    "type": "array",
+                    "name": "Адреса для CORS"
+                }
+            }
+        },
+        "cloudflare": {
+            "name": "Cloudflare",
+            "memo": "Параметры cloudflare",
+            "conditions": [
+                "cloudflare"
+            ],
+            "public_params": {
+                "ApiURL": {
+                    "name": "ApiURL",
+                    "memo": "Url cloudflare сервера",
+                    "type": "string",
+                    "defaultValue": ""
+                },
+                "AuthKey": {
+                    "name": "AuthKey",
+                    "memo": "Ключ аутентификации",
+                    "type": "string",
+                    "defaultValue": ""
+                },
+                "AuthEmail": {
+                    "name": "AuthEmail",
+                    "memo": "Email для аутентификации",
+                    "type": "string",
+                    "defaultValue": ""
+                },
+                "SiteID": {
+                    "name": "SiteID",
+                    "memo": "Id сайта",
+                    "type": "integer",
+                    "defaultValue": 0
+                }
+            }
+        }
+    }
+}

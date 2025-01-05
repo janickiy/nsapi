@@ -1,0 +1,93 @@
+/certificate/{idCertificate}/signature:
+  get:
+    tags:
+      - View Certificate
+    summary: Signatures
+    description: Сохраненные подписи
+    operationId: signatures
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          type: object
+          additionalProperties:
+            $ref: '../definitions/certificateModels/SignatureModel.yaml'
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CreateSignature
+    description: Добавление подписи
+    operationId: create_signature
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              description: Идентификатор подписи
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: SignaturesUpdate
+    description: Сохранение подписей
+    operationId: signatures_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          additionalProperties:
+            $ref: '../definitions/requestModels/SignatureRequest.yaml'
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate/{idCertificate}/signature/{idSignature}:
+  delete:
+    tags:
+      - Create/Edit Certificate
+    summary: DeleteSignature
+    description: Удаление подписи
+    operationId: delete_signature
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: idSignature
+        description: Идентификатор подписи
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'

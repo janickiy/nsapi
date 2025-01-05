@@ -1,0 +1,10 @@
+type: object
+properties:
+  rolls_note:
+    type: string
+    description: Сноска для рулонов
+  melds:
+    type: object
+    description: Плавки (в качестве ключа - идентификатор плавки)
+    additionalProperties:
+      $ref: './MeldModel.yaml'

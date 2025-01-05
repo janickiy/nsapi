@@ -1,0 +1,4 @@
+# Активатор баш-скрипта снифера (см Readme)
+
+#!/bin/bash
+./deploy/standard/pre-commit.sh

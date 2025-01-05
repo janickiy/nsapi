@@ -1,0 +1,44 @@
+/certificate/{id}/rolls-sort:
+  get:
+    tags:
+      - View Certificate
+    summary: RollsSort
+    description: Сохраненные детальные о порядке сортировки рулонов
+    operationId: rolls_sort
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          $ref: '../definitions/certificateModels/RollsSortStep.yaml'
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: UpdateRollsSort
+    description: Сохранение информации о сортировки рулонов
+    operationId: update_rolls_sort
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: id
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: array
+          description: Отсортированный массив идентификаторов рулонов
+          items:
+            type: integer
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'

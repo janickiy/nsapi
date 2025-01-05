@@ -1,0 +1,7 @@
+suite_namespace: api\tests\api
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+            url: 'config test-domain'
+            depends: PhpBrowser

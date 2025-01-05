@@ -1,0 +1,85 @@
+{
+  "name": "quartz/yii2-base-app",
+  "description": "Base application on Yii2",
+  "keywords": [
+    "yii2",
+    "framework",
+    "advanced",
+    "application template"
+  ],
+  "homepage": "http://www.your-site.com/",
+  "type": "project",
+  "license": "All rights reserved",
+  "support": {
+    "issues": "http://gitlab.freematiq.com/quartz/yii2-base-app/issues",
+    "source": "http://gitlab.freematiq.com/quartz/yii2-base-app"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "http://satis.freematiq.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.2.0",
+    "bower-asset/bootstrap": "^3.3",
+    "bower-asset/bootstrap-tabdrop": "*",
+    "bower-asset/bootstrap-toggle": "*",
+    "bower-asset/jquery.timers": "*",
+    "bower-asset/slick.js": "*",
+    "cebe/markdown": "~1.0.0",
+    "cebe/markdown-latex": "~1.0.0",
+    "centraldesktop/stomp": "dev-master",
+    "flow/jsonpath": "^0.4",
+    "guzzlehttp/guzzle": "^6.3",
+    "kartik-v/yii2-bootstrap4-dropdown": "^1.0",
+    "nex/yii2-chosen": "dev-master",
+    "npm-asset/bootstrap": "*",
+    "npm-asset/jquery": "^2.2",
+    "phpoffice/phpspreadsheet": "^2.1",
+    "quartz/yii2-adminlte-theme": "2.*",
+    "quartz/yii2-debug": "1.*",
+    "quartz/yii2-fileapi-widget": "2.*",
+    "quartz/yii2-gii": "3.*",
+    "quartz/yii2-image-behavior": "1.*",
+    "quartz/yii2-imperavi-widget": "2.*",
+    "quartz/yii2-installer": "1.*",
+    "quartz/yii2-localization": "2.*",
+    "quartz/yii2-mailnotify": "2.*",
+    "quartz/yii2-multiple-upload": "2.*",
+    "quartz/yii2-rbac": "2.*",
+    "quartz/yii2-reference": "4.*",
+    "quartz/yii2-settings-module": "3.*",
+    "quartz/yii2-tools": "1.*",
+    "quartz/yii2-user": "3.*",
+    "quartz/yii2-utilities": "1.*",
+    "yiisoft/yii2": "*",
+    "yiisoft/yii2-bootstrap": "*",
+    "yiisoft/yii2-bootstrap4": "1.0.x-dev",
+    "yiisoft/yii2-httpclient": "^2.0",
+    "yiisoft/yii2-swiftmailer": "*"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.99",
+    "proget-hq/phpstan-yii2": "^0.7.6",
+    "squizlabs/php_codesniffer": "*",
+    "yiisoft/yii2-codeception": "*",
+    "yiisoft/yii2-debug": "*",
+    "yiisoft/yii2-faker": "*",
+    "yiisoft/yii2-gii": "2.0.*"
+  },
+  "config": {
+    "vendor-dir": "../vendor",
+    "process-timeout": 1800,
+    "secure-http": false,
+    "sort-packages": true,
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  }
+}

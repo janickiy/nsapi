@@ -1,0 +1,30 @@
+type: object
+description: Параметры толщины стенки
+properties:
+  theoretical_mass:
+    type: number
+    description: Теоретическая масса 1 м
+  test_pressure:
+    type: number
+    description: Минимальное испытательное давление
+  strength_min:
+    type: number
+    description: Минимальное значение предела прочности
+  fluidity_min:
+    type: number
+    description: Минимальное значение предела текучести
+  fluidity_max:
+    type: number
+    description: Максимальное значение предела текучести
+  relative_extension_min:
+    type: number
+    description: Минимальное значение относительного удлинения
+  absorbed_energy_1_min:
+    type: number
+    description: Минимальное значение поглощенной энергии образец 1
+  absorbed_energy_2_min:
+    type: number
+    description: Минимальное значение поглощенной энергии образец 2
+  absorbed_energy_3_min:
+    type: number
+    description: Минимальное значение поглощенной энергии образец 3

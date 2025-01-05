@@ -1,0 +1,3122 @@
+---
+  swagger: "2.0"
+  info: 
+    version: "1.0.0"
+    title: "Документация для api"
+    contact: 
+      name: "adminfmq@freematiq.com"
+  basePath: "/api"
+  paths: 
+    /auth/signin: 
+      post: 
+        tags: 
+          - "User"
+        summary: "Signin"
+        description: "Авторизация пользователя"
+        operationId: "signin"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "email"
+                - "password"
+              properties: 
+                email: 
+                  type: "string"
+                password: 
+                  type: "string"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /auth/logout: 
+      post: 
+        tags: 
+          - "User"
+        summary: "Logout"
+        description: "Сброс авторизации"
+        operationId: "logout"
+        produces: 
+          - "application/json"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /user: 
+      get: 
+        tags: 
+          - "User"
+        summary: "UserInfo"
+        description: "Информация о пользователе"
+        operationId: "userInfo"
+        produces: 
+          - "application/json"
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+                - "email"
+                - "role"
+              properties: 
+                id: 
+                  type: "integer"
+                email: 
+                  description: "Email"
+                  type: "string"
+                last_name: 
+                  description: "Фамилия"
+                  type: "string"
+                first_name: 
+                  description: "Имя"
+                  type: "string"
+                middle_name: 
+                  description: "Отчество"
+                  type: "string"
+                role: 
+                  type: "string"
+                  description: "Роль пользователя [user - Сотрудник (может создавать сертификаты), moderator - Директор (может согласовывать сертификат), developer - Редактор справочников (может работать в админке и редактировать справочники), admin - Администратор (может создавать пользователей)]"
+                  enum: 
+                    - "admin"
+                    - "developer"
+                    - "moderator"
+                    - "user"
+    /user/change-password: 
+      put: 
+        tags: 
+          - "User"
+        summary: "ChangePassword"
+        description: "Смена пароля"
+        operationId: "change_password"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "old_password"
+                - "new_password"
+                - "confirm_password"
+              properties: 
+                old_password: 
+                  description: "Текущий пароль"
+                  type: "string"
+                new_password: 
+                  description: "Новый пароль"
+                  type: "string"
+                confirm_password: 
+                  description: "Подтверждение пароля"
+                  type: "string"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /references/standard: 
+      get: 
+        tags: 
+          - "References"
+        summary: "StandardList"
+        description: "Справочник стандартов"
+        operationId: "standard_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "name"
+            description: "Фильтр по названию"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    type: "string"
+    /references/hardness: 
+      get: 
+        tags: 
+          - "References"
+        summary: "HardnessList"
+        description: "Справочник групп прочности"
+        operationId: "hardness_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "name"
+            description: "Фильтр по названию"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    type: "string"
+    /references/outer-diameter: 
+      get: 
+        tags: 
+          - "References"
+        summary: "OuterDiameterList"
+        description: "Справочник внешних диаметров"
+        operationId: "outer_diameter_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                  - "millimeter"
+                  - "inch"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    description: "Текстовое название"
+                    type: "string"
+                  millimeter: 
+                    description: "Диаметр в миллиметрах"
+                    type: "number"
+                  inch: 
+                    description: "Диаметр в дюймах"
+                    type: "number"
+    /references/customer: 
+      get: 
+        tags: 
+          - "References"
+        summary: "CustomerList"
+        description: "Справочник полкупателей"
+        operationId: "customer_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "name"
+            description: "Фильтр по названию"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    type: "string"
+    /references/control-method: 
+      get: 
+        tags: 
+          - "References"
+        summary: "ControlMethodList"
+        description: "Справочник методов контроля"
+        operationId: "control_method_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "name"
+            description: "Фильтр по названию"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                  - "nd_control_method"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    type: "string"
+                  nd_control_method: 
+                    type: "array"
+                    description: "Массив НД на метод контроля"
+                    items: 
+                      type: "object"
+                      required: 
+                        - "id"
+                        - "name"
+                      properties: 
+                        id: 
+                          type: "integer"
+                        name: 
+                          type: "string"
+    /references/control-result: 
+      get: 
+        tags: 
+          - "References"
+        summary: "ControlResultList"
+        description: "Справочник результатов контроля"
+        operationId: "control_result_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "text"
+            description: "Фильтр по тексту"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "text"
+                properties: 
+                  id: 
+                    type: "integer"
+                  text: 
+                    type: "string"
+    /references/wall-thickness: 
+      get: 
+        tags: 
+          - "References"
+        summary: "WallThicknessList"
+        description: "Справочник толщин стенки"
+        operationId: "wall_thickness_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "name"
+            description: "Фильтр по названию"
+            type: "string"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "name"
+                  - "value"
+                properties: 
+                  id: 
+                    type: "integer"
+                  name: 
+                    description: "Текстовое название"
+                    type: "string"
+                  value: 
+                    description: "Значение"
+                    type: "number"
+    /certificate/{id}: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateCommonFields"
+        description: "Список сохраненных полей основных параметров"
+        operationId: "certificate_common_fields"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+                - "number"
+                - "number_tube"
+                - "created_at"
+              properties: 
+                id: 
+                  type: "integer"
+                  description: "Иденатификатор сертификата"
+                number: 
+                  type: "string"
+                  description: "Номер документа"
+                number_tube: 
+                  type: "string"
+                  description: "Номер трубы"
+                rfid: 
+                  type: "string"
+                  description: "RFID метка"
+                created_at: 
+                  type: "string"
+                  description: "Дата создания"
+                product_type: 
+                  type: "string"
+                  description: "Вид изделия"
+                standard_id: 
+                  type: "integer"
+                  description: "Идентификатор стандарта"
+                hardness_id: 
+                  type: "integer"
+                  description: "Идентификатор группы прочности"
+                outer_diameter_id: 
+                  type: "integer"
+                  description: "Идентификатор внешнего диаметра"
+                agreement_delivery: 
+                  type: "string"
+                  description: "Договор поставки"
+                type_heat_treatment: 
+                  type: "string"
+                  description: "Вид термической обработки"
+                type_quick_connection: 
+                  type: "string"
+                  description: "Тип быстросъемного соединения"
+                type_quick_connection_note: 
+                  type: "string"
+                  description: "Сноска для типа быстросъемного соединения"
+                result_hydrostatic_test: 
+                  type: "string"
+                  description: "Результат гидростатических испытаний"
+                brand_geophysical_cable: 
+                  type: "string"
+                  description: "Марка геофизического кабеля"
+                brand_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для типа марки геофизического кабеля"
+                length_geophysical_cable: 
+                  type: "number"
+                  description: "Длина геофизического кабеля"
+                length_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для длины геофизического кабеля"
+                customer: 
+                  type: "string"
+                  description: "Покупатель"
+                test_pressure: 
+                  type: "number"
+                  description: "Испытательное давление"
+                theoretical_mass: 
+                  type: "number"
+                  description: "Теоретическая масса"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateCommonUpdate"
+        description: "Обновление основных параметров"
+        operationId: "certificate_common_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "number"
+                - "number_tube"
+                - "created_at"
+              properties: 
+                number: 
+                  type: "string"
+                  description: "Номер документа"
+                number_tube: 
+                  type: "string"
+                  description: "Номер трубы"
+                rfid: 
+                  type: "string"
+                  description: "RFID метка"
+                created_at: 
+                  type: "string"
+                  description: "Дата создания (в формате dd.mm.yyyy)"
+                product_type: 
+                  type: "string"
+                  description: "Вид изделия"
+                standard_id: 
+                  type: "integer"
+                  description: "Идентификатор стандарта"
+                hardness_id: 
+                  type: "integer"
+                  description: "Идентификатор группы прочности"
+                outer_diameter_id: 
+                  type: "integer"
+                  description: "Идентификатор внешнего диаметра"
+                agreement_delivery: 
+                  type: "string"
+                  description: "Договор поставки"
+                type_heat_treatment: 
+                  type: "string"
+                  description: "Вид термической обработки"
+                type_quick_connection: 
+                  type: "string"
+                  description: "Тип быстросъемного соединения"
+                type_quick_connection_note: 
+                  type: "string"
+                  description: "Сноска для типа быстросъемного соединения"
+                result_hydrostatic_test: 
+                  type: "string"
+                  description: "Результат гидростатических испытаний"
+                brand_geophysical_cable: 
+                  type: "string"
+                  description: "Марка геофизического кабеля"
+                brand_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для типа марки геофизического кабеля"
+                length_geophysical_cable: 
+                  type: "number"
+                  description: "Длина геофизического кабеля"
+                length_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для длины геофизического кабеля"
+                customer: 
+                  type: "string"
+                  description: "Покупатель"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+      delete: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateDelete"
+        description: "Удаление сертификата"
+        operationId: "certificate_delete"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate: 
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CreateCertificate"
+        description: "Создание сертификата"
+        operationId: "create_certificate"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "number"
+                - "number_tube"
+                - "created_at"
+              properties: 
+                number: 
+                  type: "string"
+                  description: "Номер документа"
+                number_tube: 
+                  type: "string"
+                  description: "Номер трубы"
+                rfid: 
+                  type: "string"
+                  description: "RFID метка"
+                created_at: 
+                  type: "string"
+                  description: "Дата создания (в формате dd.mm.yyyy)"
+                product_type: 
+                  type: "string"
+                  description: "Вид изделия"
+                standard_id: 
+                  type: "integer"
+                  description: "Идентификатор стандарта"
+                hardness_id: 
+                  type: "integer"
+                  description: "Идентификатор группы прочности"
+                outer_diameter_id: 
+                  type: "integer"
+                  description: "Идентификатор внешнего диаметра"
+                agreement_delivery: 
+                  type: "string"
+                  description: "Договор поставки"
+                type_heat_treatment: 
+                  type: "string"
+                  description: "Вид термической обработки"
+                type_quick_connection: 
+                  type: "string"
+                  description: "Тип быстросъемного соединения"
+                type_quick_connection_note: 
+                  type: "string"
+                  description: "Сноска для типа быстросъемного соединения"
+                result_hydrostatic_test: 
+                  type: "string"
+                  description: "Результат гидростатических испытаний"
+                brand_geophysical_cable: 
+                  type: "string"
+                  description: "Марка геофизического кабеля"
+                brand_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для типа марки геофизического кабеля"
+                length_geophysical_cable: 
+                  type: "number"
+                  description: "Длина геофизического кабеля"
+                length_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для длины геофизического кабеля"
+                customer: 
+                  type: "string"
+                  description: "Покупатель"
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+    /certificate/{id}/restore: 
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateRestore"
+        description: "Восстановление сертификата (в черновики)"
+        operationId: "certificate_restore"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{id}/refund: 
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateRefund"
+        description: "Возвращение сертификата на доработку"
+        operationId: "certificate_refund"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{id}/approve: 
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateApprove"
+        description: "Отправка на согласование/Ввод в эксплуатацию"
+        operationId: "certificate_approve"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{id}/copy: 
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CertificateCopy"
+        description: "Копирование сертификата"
+        operationId: "certificate_copy"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "number"
+                - "number_tube"
+                - "created_at"
+              properties: 
+                number: 
+                  type: "string"
+                  description: "Номер документа"
+                number_tube: 
+                  type: "string"
+                  description: "Номер трубы"
+                rfid: 
+                  type: "string"
+                  description: "RFID метка"
+                created_at: 
+                  type: "string"
+                  description: "Дата создания (в формате dd.mm.yyyy)"
+                product_type: 
+                  type: "string"
+                  description: "Вид изделия"
+                standard_id: 
+                  type: "integer"
+                  description: "Идентификатор стандарта"
+                hardness_id: 
+                  type: "integer"
+                  description: "Идентификатор группы прочности"
+                outer_diameter_id: 
+                  type: "integer"
+                  description: "Идентификатор внешнего диаметра"
+                agreement_delivery: 
+                  type: "string"
+                  description: "Договор поставки"
+                type_heat_treatment: 
+                  type: "string"
+                  description: "Вид термической обработки"
+                type_quick_connection: 
+                  type: "string"
+                  description: "Тип быстросъемного соединения"
+                type_quick_connection_note: 
+                  type: "string"
+                  description: "Сноска для типа быстросъемного соединения"
+                result_hydrostatic_test: 
+                  type: "string"
+                  description: "Результат гидростатических испытаний"
+                brand_geophysical_cable: 
+                  type: "string"
+                  description: "Марка геофизического кабеля"
+                brand_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для типа марки геофизического кабеля"
+                length_geophysical_cable: 
+                  type: "number"
+                  description: "Длина геофизического кабеля"
+                length_geophysical_cable_note: 
+                  type: "string"
+                  description: "Сноска для длины геофизического кабеля"
+                customer: 
+                  type: "string"
+                  description: "Покупатель"
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+    /certificate/{id}/non-destructive-test: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "NonDestructiveTestFields"
+        description: "Сохраненные параметры неразрушающего контроля"
+        operationId: "non_destructive_test_fields"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              properties: 
+                cross_seams_roll_ends: 
+                  type: "object"
+                  description: "Поперечные швы концов рулонов"
+                  properties: 
+                    method_1: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    method_2: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    method_3: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                longitudinal_seams: 
+                  type: "object"
+                  description: "Продольные швы ГНКТ"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+                base_metal: 
+                  type: "object"
+                  description: "Основной металл ГНКТ"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+                circular_corner_seam: 
+                  type: "object"
+                  description: "Кольцевой кгловой шов"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "NonDestructiveTestUpdate"
+        description: "Сохранение параметров неразрушающего контроля"
+        operationId: "non_destructive_test_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              properties: 
+                cross_seams_roll_ends: 
+                  type: "object"
+                  description: "Поперечные швы концов рулонов"
+                  properties: 
+                    method_1: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    method_2: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    method_3: 
+                      type: "object"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                longitudinal_seams: 
+                  type: "object"
+                  description: "Продольные швы ГНКТ"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+                base_metal: 
+                  type: "object"
+                  description: "Основной металл ГНКТ"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+                circular_corner_seam: 
+                  type: "object"
+                  description: "Кольцевой кгловой шов"
+                  properties: 
+                    control_method_id: 
+                      type: "integer"
+                      description: "Метод контроля"
+                    nd_control_method_id: 
+                      type: "integer"
+                      description: "НД на метод контроля"
+                    control_result_id: 
+                      type: "integer"
+                      description: "Результат контроля"
+                    note: 
+                      type: "string"
+                      description: "Сноска для метода контроля"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/meld: 
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CreateMeld"
+        description: "Добавление плавки"
+        operationId: "create_meld"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "number"
+              properties: 
+                number: 
+                  type: "string"
+                  description: "Номер плавки"
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+                  description: "Идентификатор плавки"
+                chemical_c_max: 
+                  type: "number"
+                  description: "Максимальная массовая доля углерода, %"
+                chemical_mn_max: 
+                  type: "number"
+                  description: "Максимальная массовая доля марганца, %"
+                chemical_si_max: 
+                  type: "number"
+                  description: "Максимальная массовая доля кремния, %"
+                chemical_s_max: 
+                  type: "number"
+                  description: "Максимальная массовая доля серы, %"
+                chemical_p_max: 
+                  type: "number"
+                  description: "Максимальная массовая доля фосфора, %"
+                dirty_type_a_max: 
+                  type: "number"
+                  description: "Максимальное значение степени загрязненности Тип A"
+                dirty_type_b_max: 
+                  type: "number"
+                  description: "Максимальное значение степени загрязненности Тип B"
+                dirty_type_c_max: 
+                  type: "number"
+                  description: "Максимальное значение степени загрязненности Тип C"
+                dirty_type_d_max: 
+                  type: "number"
+                  description: "Максимальное значение степени загрязненности Тип D"
+                dirty_type_ds_max: 
+                  type: "number"
+                  description: "Максимальное значение степени загрязненности Тип DS"
+    /certificate/{idCertificate}/meld/{idMeld}: 
+      delete: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "DeleteMeld"
+        description: "Удаление плавки"
+        operationId: "delete_meld"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idMeld"
+            description: "Идентификатор плавки"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/{idMeld}/roll: 
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CreateRoll"
+        description: "Добавление рулона"
+        operationId: "create_roll"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idMeld"
+            description: "Идентификатор плавки"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              required: 
+                - "number"
+              properties: 
+                number: 
+                  type: "string"
+                  description: "Номер рулона"
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+                  description: "Идентификатор рулона"
+                serial_number: 
+                  type: "integer"
+                  description: "Порядковый номер"
+                grain_size_max: 
+                  type: "number"
+                  description: "Максимальный размер зерна"
+                hardness_om_max: 
+                  type: "number"
+                  description: "Максимальная твердтость OM"
+                hardness_ssh_max: 
+                  type: "number"
+                  description: "Максимальная твердтость СШ"
+                hardness_ztv_max: 
+                  type: "number"
+                  description: "Максимальная твердтость ЗТВ"
+    /certificate/{idCertificate}/{idMeld}/roll/{idRoll}: 
+      delete: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "DeleteRoll"
+        description: "Удаление Рулона"
+        operationId: "delete_roll"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idMeld"
+            description: "Идентификатор плавки"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idRoll"
+            description: "Идентификатор рулона"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{id}/rolls-sort: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "RollsSort"
+        description: "Сохраненные детальные о порядке сортировки рулонов"
+        operationId: "rolls_sort"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "number"
+                  - "serial_number"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор рулона"
+                  serial_number: 
+                    type: "integer"
+                    description: "Порядковый номер"
+                  number: 
+                    type: "string"
+                    description: "Номер рулона"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "UpdateRollsSort"
+        description: "Сохранение информации о сортировки рулонов"
+        operationId: "update_rolls_sort"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "array"
+              description: "Отсортированный массив идентификаторов рулонов"
+              items: 
+                type: "integer"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{id}/detail-tube: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "DetailTube"
+        description: "Сохраненные детальные параметры трубы"
+        operationId: "detail_tube"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              properties: 
+                rolls_note: 
+                  type: "string"
+                  description: "Сноска для рулонов"
+                melds: 
+                  type: "object"
+                  description: "Плавки (в качестве ключа - идентификатор плавки)"
+                  additionalProperties: 
+                    type: "object"
+                    required: 
+                      - "id"
+                      - "number"
+                    properties: 
+                      id: 
+                        type: "integer"
+                        description: "Идентификатор плавки"
+                      number: 
+                        type: "string"
+                        description: "Номер плавки"
+                      sekv: 
+                        type: "number"
+                        description: "СЭКВ"
+                      sekv_note: 
+                        type: "string"
+                        description: "Сноска для СЭКВ"
+                      chemical_c: 
+                        type: "number"
+                        description: "Химический состав углерод C, %"
+                      chemical_c_max: 
+                        type: "number"
+                        description: "Максимальная массовая доля углерода, %"
+                      chemical_mn: 
+                        type: "number"
+                        description: "Химический состав марганец Mn, %"
+                      chemical_mn_max: 
+                        type: "number"
+                        description: "Максимальная массовая доля марганца, %"
+                      chemical_si: 
+                        type: "number"
+                        description: "Химический состав кремний Si, %"
+                      chemical_si_max: 
+                        type: "number"
+                        description: "Максимальная массовая доля кремния, %"
+                      chemical_s: 
+                        type: "number"
+                        description: "Химический состав сера S, %"
+                      chemical_s_max: 
+                        type: "number"
+                        description: "Максимальная массовая доля серы, %"
+                      chemical_p: 
+                        type: "number"
+                        description: "Химический состав фосфор P, %"
+                      chemical_p_max: 
+                        type: "number"
+                        description: "Максимальная массовая доля фосфора, %"
+                      dirty_type_a: 
+                        type: "number"
+                        description: "Степень загрязненности Тип A"
+                      dirty_type_a_max: 
+                        type: "number"
+                        description: "Максимальное значение степени загрязненности Тип A"
+                      dirty_type_b: 
+                        type: "number"
+                        description: "Степень загрязненности Тип B"
+                      dirty_type_b_max: 
+                        type: "number"
+                        description: "Максимальное значение степени загрязненности Тип B"
+                      dirty_type_c: 
+                        type: "number"
+                        description: "Степень загрязненности Тип C"
+                      dirty_type_c_max: 
+                        type: "number"
+                        description: "Максимальное значение степени загрязненности Тип C"
+                      dirty_type_d: 
+                        type: "number"
+                        description: "Степень загрязненности Тип D"
+                      dirty_type_d_max: 
+                        type: "number"
+                        description: "Максимальное значение степени загрязненности Тип D"
+                      dirty_type_ds: 
+                        type: "number"
+                        description: "Степень загрязненности Тип DS"
+                      dirty_type_ds_max: 
+                        type: "number"
+                        description: "Максимальное значение степени загрязненности Тип DS"
+                      rolls: 
+                        type: "object"
+                        description: "Рулоны (в качестве ключа - идентификатор рулона)"
+                        additionalProperties: 
+                          type: "object"
+                          required: 
+                            - "id"
+                            - "number"
+                          properties: 
+                            id: 
+                              type: "integer"
+                              description: "Идентификатор рулона"
+                            serial_number: 
+                              type: "integer"
+                              description: "Порядковый номер"
+                            number: 
+                              type: "string"
+                              description: "Номер рулона"
+                            wall_thickness_id: 
+                              type: "integer"
+                              description: "Идентификатор толщины стенки"
+                            wall_thickness_info: 
+                              type: "object"
+                              description: "Параметры толщины стенки"
+                              properties: 
+                                theoretical_mass: 
+                                  type: "number"
+                                  description: "Теоретическая масса 1 м"
+                                test_pressure: 
+                                  type: "number"
+                                  description: "Минимальное испытательное давление"
+                                strength_min: 
+                                  type: "number"
+                                  description: "Минимальное значение предела прочности"
+                                fluidity_min: 
+                                  type: "number"
+                                  description: "Минимальное значение предела текучести"
+                                fluidity_max: 
+                                  type: "number"
+                                  description: "Максимальное значение предела текучести"
+                                relative_extension_min: 
+                                  type: "number"
+                                  description: "Минимальное значение относительного удлинения"
+                                absorbed_energy_1_min: 
+                                  type: "number"
+                                  description: "Минимальное значение поглощенной энергии образец 1"
+                                absorbed_energy_2_min: 
+                                  type: "number"
+                                  description: "Минимальное значение поглощенной энергии образец 2"
+                                absorbed_energy_3_min: 
+                                  type: "number"
+                                  description: "Минимальное значение поглощенной энергии образец 3"
+                            length: 
+                              type: "number"
+                              description: "Длина рулона"
+                            location_seams: 
+                              type: "number"
+                              description: "Расположения поперечных швов"
+                            location_seams_note: 
+                              type: "string"
+                              description: "Сноска для расположения поперечных швов"
+                            grain_size: 
+                              type: "number"
+                              description: "Размер зерна"
+                            grain_size_max: 
+                              type: "number"
+                              description: "Максимальный размер зерна"
+                            hardness_note: 
+                              type: "string"
+                              description: "Сноска для твердости"
+                            is_exact_hardness_om: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости OM"
+                            hardness_om: 
+                              type: "number"
+                              description: "Твердтость OM"
+                            hardness_om_max: 
+                              type: "number"
+                              description: "Максимальная твердтость OM"
+                            is_exact_hardness_ssh: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости СШ"
+                            hardness_ssh: 
+                              type: "number"
+                              description: "Твердтость СШ"
+                            hardness_ssh_max: 
+                              type: "number"
+                              description: "Максимальная твердтость СШ"
+                            is_exact_hardness_ztv: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости ЗТВ"
+                            hardness_ztv: 
+                              type: "number"
+                              description: "Твердтость ЗТВ"
+                            hardness_ztv_max: 
+                              type: "number"
+                              description: "Максимальная твердтость ЗТВ"
+                            is_use_note: 
+                              type: "boolean"
+                              description: "Использовать сноску"
+                            is_fill_testing: 
+                              type: "boolean"
+                              description: "Заполнены результаты тестирования"
+                            absorbed_energy_1: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 1"
+                            absorbed_energy_2: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 2"
+                            absorbed_energy_3: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 3"
+                            fluidity: 
+                              type: "number"
+                              description: "Предел текучести"
+                            fluidity_note: 
+                              type: "string"
+                              description: "Сноска для предела текучести"
+                            strength: 
+                              type: "number"
+                              description: "Предел прочности"
+                            relative_extension: 
+                              type: "number"
+                              description: "Относительное удлинение"
+                            relative_extension_note: 
+                              type: "string"
+                              description: "Сноска для относительного удлинения"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "DetailTubeUpdate"
+        description: "Сохранение детальных параметров трубы"
+        operationId: "detail_tube_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              properties: 
+                rolls_note: 
+                  type: "string"
+                  description: "Сноска для рулонов"
+                melds: 
+                  type: "object"
+                  description: "Плавки (в качестве ключа - идентификатор плавки)"
+                  additionalProperties: 
+                    type: "object"
+                    properties: 
+                      sekv: 
+                        type: "number"
+                        description: "СЭКВ"
+                      sekv_note: 
+                        type: "string"
+                        description: "Сноска для СЭКВ"
+                      chemical_c: 
+                        type: "number"
+                        description: "Химический состав углерод C, %"
+                      chemical_mn: 
+                        type: "number"
+                        description: "Химический состав марганец Mn, %"
+                      chemical_si: 
+                        type: "number"
+                        description: "Химический состав кремний Si, %"
+                      chemical_s: 
+                        type: "number"
+                        description: "Химический состав сера S, %"
+                      chemical_p: 
+                        type: "number"
+                        description: "Химический состав фосфор P, %"
+                      dirty_type_a: 
+                        type: "number"
+                        description: "Степень загрязненности Тип A"
+                      dirty_type_b: 
+                        type: "number"
+                        description: "Степень загрязненности Тип B"
+                      dirty_type_c: 
+                        type: "number"
+                        description: "Степень загрязненности Тип C"
+                      dirty_type_d: 
+                        type: "number"
+                        description: "Степень загрязненности Тип D"
+                      dirty_type_ds: 
+                        type: "number"
+                        description: "Степень загрязненности Тип DS"
+                      rolls: 
+                        type: "object"
+                        description: "Рулоны (в качестве ключа - идентификатор рулона)"
+                        additionalProperties: 
+                          type: "object"
+                          properties: 
+                            wall_thickness_id: 
+                              type: "integer"
+                              description: "Идентификатор толщины стенки"
+                            length: 
+                              type: "number"
+                              description: "Длина рулона"
+                            location_seams_note: 
+                              type: "string"
+                              description: "Сноска для расположения поперечных швов"
+                            grain_size: 
+                              type: "number"
+                              description: "Размер зерна"
+                            hardness_note: 
+                              type: "string"
+                              description: "Сноска для твердости"
+                            is_exact_hardness_om: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости OM"
+                            hardness_om: 
+                              type: "number"
+                              description: "Твердтость OM"
+                            is_exact_hardness_ssh: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости СШ"
+                            hardness_ssh: 
+                              type: "number"
+                              description: "Твердтость СШ"
+                            is_exact_hardness_ztv: 
+                              type: "boolean"
+                              description: "Точное или нет значение твердтости ЗТВ"
+                            hardness_ztv: 
+                              type: "number"
+                              description: "Твердтость ЗТВ"
+                            is_use_note: 
+                              type: "boolean"
+                              description: "Использовать сноску"
+                            is_fill_testing: 
+                              type: "boolean"
+                              description: "Заполнены результаты тестирования"
+                            absorbed_energy_1: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 1"
+                            absorbed_energy_2: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 2"
+                            absorbed_energy_3: 
+                              type: "number"
+                              description: "Поглощенная энергия образец 3"
+                            fluidity: 
+                              type: "number"
+                              description: "Предел текучести"
+                            fluidity_note: 
+                              type: "string"
+                              description: "Сноска для предела текучести"
+                            strength: 
+                              type: "number"
+                              description: "Предел прочности"
+                            relative_extension: 
+                              type: "number"
+                              description: "Относительное удлинение"
+                            relative_extension_note: 
+                              type: "string"
+                              description: "Сноска для относительного удлинения"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/wall-thickness-info/{id}: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "WallThicknessInfo"
+        description: "Параметры толщины стенки"
+        operationId: "wall-thickness-info"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор толщины стенки"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              description: "Параметры толщины стенки"
+              properties: 
+                theoretical_mass: 
+                  type: "number"
+                  description: "Теоретическая масса 1 м"
+                test_pressure: 
+                  type: "number"
+                  description: "Минимальное испытательное давление"
+                strength_min: 
+                  type: "number"
+                  description: "Минимальное значение предела прочности"
+                fluidity_min: 
+                  type: "number"
+                  description: "Минимальное значение предела текучести"
+                fluidity_max: 
+                  type: "number"
+                  description: "Максимальное значение предела текучести"
+                relative_extension_min: 
+                  type: "number"
+                  description: "Минимальное значение относительного удлинения"
+                absorbed_energy_1_min: 
+                  type: "number"
+                  description: "Минимальное значение поглощенной энергии образец 1"
+                absorbed_energy_2_min: 
+                  type: "number"
+                  description: "Минимальное значение поглощенной энергии образец 2"
+                absorbed_energy_3_min: 
+                  type: "number"
+                  description: "Минимальное значение поглощенной энергии образец 3"
+    /certificate/{id}/cylinder: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "Cylinder"
+        description: "Сохраненные параметры барабана"
+        operationId: "cylinder"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              properties: 
+                material: 
+                  type: "string"
+                  description: "Материал"
+                weight: 
+                  type: "number"
+                  description: "Масса"
+                diameter_core: 
+                  type: "number"
+                  description: "Диаметр сердечника"
+                diameter_cheek: 
+                  type: "number"
+                  description: "Диаметр щек"
+                width: 
+                  type: "number"
+                  description: "Ширина"
+                mark_nitrogen: 
+                  type: "string"
+                  description: "Отметка о заполнении азотом"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CylinderUpdate"
+        description: "Сохранение параметров барабана"
+        operationId: "cylinder_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              properties: 
+                material: 
+                  type: "string"
+                  description: "Материал"
+                weight: 
+                  type: "number"
+                  description: "Масса"
+                diameter_core: 
+                  type: "number"
+                  description: "Диаметр сердечника"
+                diameter_cheek: 
+                  type: "number"
+                  description: "Диаметр щек"
+                width: 
+                  type: "number"
+                  description: "Ширина"
+                mark_nitrogen: 
+                  type: "string"
+                  description: "Отметка о заполнении азотом"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/note: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "Notes"
+        description: "Сохраненные примечания"
+        operationId: "notes"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              additionalProperties: 
+                type: "object"
+                required: 
+                  - "id"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор примечания"
+                  text: 
+                    type: "string"
+                    description: "Текст примечания"
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CreateNote"
+        description: "Добавление примечания"
+        operationId: "create_note"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+                  description: "Идентификатор примечания"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "NotesUpdate"
+        description: "Сохранение примечания"
+        operationId: "notes_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              additionalProperties: 
+                type: "object"
+                properties: 
+                  text: 
+                    type: "string"
+                    description: "Текст примечания"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/note/{idNote}: 
+      delete: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "DeleteNote"
+        description: "Удаление примечания"
+        operationId: "delete_note"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idNote"
+            description: "Идентификатор примечания"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/signature: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "Signatures"
+        description: "Сохраненные подписи"
+        operationId: "signatures"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              additionalProperties: 
+                type: "object"
+                required: 
+                  - "id"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор подписи"
+                  name: 
+                    type: "string"
+                    description: "ФИО"
+                  position: 
+                    type: "string"
+                    description: "Должность"
+      post: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "CreateSignature"
+        description: "Добавление подписи"
+        operationId: "create_signature"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              required: 
+                - "id"
+              properties: 
+                id: 
+                  type: "integer"
+                  description: "Идентификатор подписи"
+      put: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "SignaturesUpdate"
+        description: "Сохранение подписей"
+        operationId: "signatures_update"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "body"
+            name: "body"
+            required: true
+            schema: 
+              type: "object"
+              additionalProperties: 
+                type: "object"
+                properties: 
+                  name: 
+                    type: "string"
+                    description: "ФИО"
+                  position: 
+                    type: "string"
+                    description: "Должность"
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/{idCertificate}/signature/{idSignature}: 
+      delete: 
+        tags: 
+          - "Create/Edit Certificate"
+        summary: "DeleteSignature"
+        description: "Удаление подписи"
+        operationId: "delete_signature"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "idCertificate"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+          - 
+            in: "path"
+            name: "idSignature"
+            description: "Идентификатор подписи"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "Успешный результат (Response body = null)"
+    /certificate/draft: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateDraftList"
+        description: "Список черновиков"
+        operationId: "certificate_draft_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "search_string"
+            description: "Поиск по различным полям сертификата"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number"
+            description: "Поиск по номеру документа"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number_tube"
+            description: "Поиск по номеру трубы"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "rfid"
+            description: "Поиск по RFID метке"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "outer_diameter_id"
+            description: "Поиск по внешнему диаметру (нужен идентификатор из справочника)"
+            type: "integer"
+            required: false
+          - 
+            in: "query"
+            name: "created_at"
+            description: "Поиск по дате создания (дата в формате dd.mm.yyyy)"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "length_min"
+            description: "Поиск по минимальной длине"
+            type: "number"
+            required: false
+          - 
+            in: "query"
+            name: "length_max"
+            description: "Поиск по максимальной длине"
+            type: "number"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "number"
+                  - "number_tube"
+                  - "created_at"
+                  - "rfid"
+                  - "status"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор сертификата"
+                  number: 
+                    type: "string"
+                    description: "Номер документа"
+                  number_tube: 
+                    type: "string"
+                    description: "Номер трубы"
+                  rfid: 
+                    type: "string"
+                    description: "RFID метка"
+                  product_type: 
+                    type: "string"
+                    description: "Вид изделия"
+                  created_at: 
+                    type: "string"
+                    description: "Дата создания"
+                  status: 
+                    type: "object"
+                    description: "Статус сертификата"
+                    required: 
+                      - "id"
+                      - "name"
+                    properties: 
+                      id: 
+                        type: "string"
+                      name: 
+                        type: "string"
+    /certificate/published: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificatePublishedList"
+        description: "Список опубликованных сертификатов"
+        operationId: "certificate_published_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "search_string"
+            description: "Поиск по различным полям сертификата"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number"
+            description: "Поиск по номеру документа"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number_tube"
+            description: "Поиск по номеру трубы"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "rfid"
+            description: "Поиск по RFID метке"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "outer_diameter_id"
+            description: "Поиск по внешнему диаметру (нужен идентификатор из справочника)"
+            type: "integer"
+            required: false
+          - 
+            in: "query"
+            name: "created_at"
+            description: "Поиск по дате создания (дата в формате dd.mm.yyyy)"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "length_min"
+            description: "Поиск по минимальной длине"
+            type: "number"
+            required: false
+          - 
+            in: "query"
+            name: "length_max"
+            description: "Поиск по максимальной длине"
+            type: "number"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "number"
+                  - "number_tube"
+                  - "created_at"
+                  - "rfid"
+                  - "status"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор сертификата"
+                  number: 
+                    type: "string"
+                    description: "Номер документа"
+                  number_tube: 
+                    type: "string"
+                    description: "Номер трубы"
+                  rfid: 
+                    type: "string"
+                    description: "RFID метка"
+                  product_type: 
+                    type: "string"
+                    description: "Вид изделия"
+                  created_at: 
+                    type: "string"
+                    description: "Дата создания"
+                  status: 
+                    type: "object"
+                    description: "Статус сертификата"
+                    required: 
+                      - "id"
+                      - "name"
+                    properties: 
+                      id: 
+                        type: "string"
+                      name: 
+                        type: "string"
+    /certificate/deleted: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateDeletedList"
+        description: "Список удаленных сертификатов"
+        operationId: "certificate_deleted_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "search_string"
+            description: "Поиск по различным полям сертификата"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number"
+            description: "Поиск по номеру документа"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number_tube"
+            description: "Поиск по номеру трубы"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "rfid"
+            description: "Поиск по RFID метке"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "outer_diameter_id"
+            description: "Поиск по внешнему диаметру (нужен идентификатор из справочника)"
+            type: "integer"
+            required: false
+          - 
+            in: "query"
+            name: "created_at"
+            description: "Поиск по дате создания (дата в формате dd.mm.yyyy)"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "length_min"
+            description: "Поиск по минимальной длине"
+            type: "number"
+            required: false
+          - 
+            in: "query"
+            name: "length_max"
+            description: "Поиск по максимальной длине"
+            type: "number"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "number"
+                  - "number_tube"
+                  - "created_at"
+                  - "rfid"
+                  - "status"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор сертификата"
+                  number: 
+                    type: "string"
+                    description: "Номер документа"
+                  number_tube: 
+                    type: "string"
+                    description: "Номер трубы"
+                  rfid: 
+                    type: "string"
+                    description: "RFID метка"
+                  product_type: 
+                    type: "string"
+                    description: "Вид изделия"
+                  created_at: 
+                    type: "string"
+                    description: "Дата создания"
+                  status: 
+                    type: "object"
+                    description: "Статус сертификата"
+                    required: 
+                      - "id"
+                      - "name"
+                    properties: 
+                      id: 
+                        type: "string"
+                      name: 
+                        type: "string"
+    /certificate/approve: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateApproveList"
+        description: "Список сертификатов на согласовании"
+        operationId: "certificate_approve_list"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "query"
+            name: "search_string"
+            description: "Поиск по различным полям сертификата"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number"
+            description: "Поиск по номеру документа"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "number_tube"
+            description: "Поиск по номеру трубы"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "rfid"
+            description: "Поиск по RFID метке"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "outer_diameter_id"
+            description: "Поиск по внешнему диаметру (нужен идентификатор из справочника)"
+            type: "integer"
+            required: false
+          - 
+            in: "query"
+            name: "created_at"
+            description: "Поиск по дате создания (дата в формате dd.mm.yyyy)"
+            type: "string"
+            required: false
+          - 
+            in: "query"
+            name: "length_min"
+            description: "Поиск по минимальной длине"
+            type: "number"
+            required: false
+          - 
+            in: "query"
+            name: "length_max"
+            description: "Поиск по максимальной длине"
+            type: "number"
+            required: false
+          - 
+            $ref: "#/components/parameters/PerPage"
+          - 
+            $ref: "#/components/parameters/Page"
+          - 
+            $ref: "#/components/parameters/Sort"
+        responses: 
+          200: 
+            headers: 
+              X-Pagination-Total-Count: 
+                type: "integer"
+                description: "Общее количество элементов списка"
+              X-Pagination-Page-Count: 
+                type: "integer"
+                description: "Общее количество страниц"
+              X-Pagination-Current-Page: 
+                type: "integer"
+                description: "Текущая страница"
+              X-Pagination-Per-Page: 
+                type: "integer"
+                description: "Количество элементов на странице"
+            schema: 
+              type: "array"
+              items: 
+                type: "object"
+                required: 
+                  - "id"
+                  - "number"
+                  - "number_tube"
+                  - "created_at"
+                  - "rfid"
+                  - "status"
+                properties: 
+                  id: 
+                    type: "integer"
+                    description: "Идентификатор сертификата"
+                  number: 
+                    type: "string"
+                    description: "Номер документа"
+                  number_tube: 
+                    type: "string"
+                    description: "Номер трубы"
+                  rfid: 
+                    type: "string"
+                    description: "RFID метка"
+                  product_type: 
+                    type: "string"
+                    description: "Вид изделия"
+                  created_at: 
+                    type: "string"
+                    description: "Дата создания"
+                  status: 
+                    type: "object"
+                    description: "Статус сертификата"
+                    required: 
+                      - "id"
+                      - "name"
+                    properties: 
+                      id: 
+                        type: "string"
+                      name: 
+                        type: "string"
+    /certificate/{id}/download: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateDownload"
+        description: "Скачать файл сертификата"
+        operationId: "certificate_download"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            description: "A XLS file"
+            content: 
+              application/vnd.ms-excel: 
+                schema: 
+                  type: "string"
+                  format: "binary"
+    /certificate/{id}/all-fields: 
+      get: 
+        tags: 
+          - "View Certificate"
+        summary: "CertificateAllFields"
+        description: "Все поля сертификата"
+        operationId: "certificate_all_fields"
+        produces: 
+          - "application/json"
+        parameters: 
+          - 
+            in: "path"
+            name: "id"
+            description: "Идентификатор сертификата"
+            type: "integer"
+            required: true
+        responses: 
+          200: 
+            schema: 
+              type: "object"
+              properties: 
+                commonStep: 
+                  type: "object"
+                  required: 
+                    - "id"
+                    - "number"
+                    - "number_tube"
+                    - "created_at"
+                  properties: 
+                    id: 
+                      type: "integer"
+                      description: "Иденатификатор сертификата"
+                    number: 
+                      type: "string"
+                      description: "Номер документа"
+                    number_tube: 
+                      type: "string"
+                      description: "Номер трубы"
+                    rfid: 
+                      type: "string"
+                      description: "RFID метка"
+                    created_at: 
+                      type: "string"
+                      description: "Дата создания"
+                    product_type: 
+                      type: "string"
+                      description: "Вид изделия"
+                    standard_id: 
+                      type: "integer"
+                      description: "Идентификатор стандарта"
+                    hardness_id: 
+                      type: "integer"
+                      description: "Идентификатор группы прочности"
+                    outer_diameter_id: 
+                      type: "integer"
+                      description: "Идентификатор внешнего диаметра"
+                    agreement_delivery: 
+                      type: "string"
+                      description: "Договор поставки"
+                    type_heat_treatment: 
+                      type: "string"
+                      description: "Вид термической обработки"
+                    type_quick_connection: 
+                      type: "string"
+                      description: "Тип быстросъемного соединения"
+                    type_quick_connection_note: 
+                      type: "string"
+                      description: "Сноска для типа быстросъемного соединения"
+                    result_hydrostatic_test: 
+                      type: "string"
+                      description: "Результат гидростатических испытаний"
+                    brand_geophysical_cable: 
+                      type: "string"
+                      description: "Марка геофизического кабеля"
+                    brand_geophysical_cable_note: 
+                      type: "string"
+                      description: "Сноска для типа марки геофизического кабеля"
+                    length_geophysical_cable: 
+                      type: "number"
+                      description: "Длина геофизического кабеля"
+                    length_geophysical_cable_note: 
+                      type: "string"
+                      description: "Сноска для длины геофизического кабеля"
+                    customer: 
+                      type: "string"
+                      description: "Покупатель"
+                    test_pressure: 
+                      type: "number"
+                      description: "Испытательное давление"
+                    theoretical_mass: 
+                      type: "number"
+                      description: "Теоретическая масса"
+                nonDestructiveTestsStep: 
+                  type: "object"
+                  properties: 
+                    cross_seams_roll_ends: 
+                      type: "object"
+                      description: "Поперечные швы концов рулонов"
+                      properties: 
+                        method_1: 
+                          type: "object"
+                          properties: 
+                            control_method_id: 
+                              type: "integer"
+                              description: "Метод контроля"
+                            nd_control_method_id: 
+                              type: "integer"
+                              description: "НД на метод контроля"
+                            control_result_id: 
+                              type: "integer"
+                              description: "Результат контроля"
+                            note: 
+                              type: "string"
+                              description: "Сноска для метода контроля"
+                        method_2: 
+                          type: "object"
+                          properties: 
+                            control_method_id: 
+                              type: "integer"
+                              description: "Метод контроля"
+                            nd_control_method_id: 
+                              type: "integer"
+                              description: "НД на метод контроля"
+                            control_result_id: 
+                              type: "integer"
+                              description: "Результат контроля"
+                            note: 
+                              type: "string"
+                              description: "Сноска для метода контроля"
+                        method_3: 
+                          type: "object"
+                          properties: 
+                            control_method_id: 
+                              type: "integer"
+                              description: "Метод контроля"
+                            nd_control_method_id: 
+                              type: "integer"
+                              description: "НД на метод контроля"
+                            control_result_id: 
+                              type: "integer"
+                              description: "Результат контроля"
+                            note: 
+                              type: "string"
+                              description: "Сноска для метода контроля"
+                    longitudinal_seams: 
+                      type: "object"
+                      description: "Продольные швы ГНКТ"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    base_metal: 
+                      type: "object"
+                      description: "Основной металл ГНКТ"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                    circular_corner_seam: 
+                      type: "object"
+                      description: "Кольцевой кгловой шов"
+                      properties: 
+                        control_method_id: 
+                          type: "integer"
+                          description: "Метод контроля"
+                        nd_control_method_id: 
+                          type: "integer"
+                          description: "НД на метод контроля"
+                        control_result_id: 
+                          type: "integer"
+                          description: "Результат контроля"
+                        note: 
+                          type: "string"
+                          description: "Сноска для метода контроля"
+                detailTubeStep: 
+                  type: "object"
+                  properties: 
+                    rolls_note: 
+                      type: "string"
+                      description: "Сноска для рулонов"
+                    melds: 
+                      type: "object"
+                      description: "Плавки (в качестве ключа - идентификатор плавки)"
+                      additionalProperties: 
+                        type: "object"
+                        required: 
+                          - "id"
+                          - "number"
+                        properties: 
+                          id: 
+                            type: "integer"
+                            description: "Идентификатор плавки"
+                          number: 
+                            type: "string"
+                            description: "Номер плавки"
+                          sekv: 
+                            type: "number"
+                            description: "СЭКВ"
+                          sekv_note: 
+                            type: "string"
+                            description: "Сноска для СЭКВ"
+                          chemical_c: 
+                            type: "number"
+                            description: "Химический состав углерод C, %"
+                          chemical_c_max: 
+                            type: "number"
+                            description: "Максимальная массовая доля углерода, %"
+                          chemical_mn: 
+                            type: "number"
+                            description: "Химический состав марганец Mn, %"
+                          chemical_mn_max: 
+                            type: "number"
+                            description: "Максимальная массовая доля марганца, %"
+                          chemical_si: 
+                            type: "number"
+                            description: "Химический состав кремний Si, %"
+                          chemical_si_max: 
+                            type: "number"
+                            description: "Максимальная массовая доля кремния, %"
+                          chemical_s: 
+                            type: "number"
+                            description: "Химический состав сера S, %"
+                          chemical_s_max: 
+                            type: "number"
+                            description: "Максимальная массовая доля серы, %"
+                          chemical_p: 
+                            type: "number"
+                            description: "Химический состав фосфор P, %"
+                          chemical_p_max: 
+                            type: "number"
+                            description: "Максимальная массовая доля фосфора, %"
+                          dirty_type_a: 
+                            type: "number"
+                            description: "Степень загрязненности Тип A"
+                          dirty_type_a_max: 
+                            type: "number"
+                            description: "Максимальное значение степени загрязненности Тип A"
+                          dirty_type_b: 
+                            type: "number"
+                            description: "Степень загрязненности Тип B"
+                          dirty_type_b_max: 
+                            type: "number"
+                            description: "Максимальное значение степени загрязненности Тип B"
+                          dirty_type_c: 
+                            type: "number"
+                            description: "Степень загрязненности Тип C"
+                          dirty_type_c_max: 
+                            type: "number"
+                            description: "Максимальное значение степени загрязненности Тип C"
+                          dirty_type_d: 
+                            type: "number"
+                            description: "Степень загрязненности Тип D"
+                          dirty_type_d_max: 
+                            type: "number"
+                            description: "Максимальное значение степени загрязненности Тип D"
+                          dirty_type_ds: 
+                            type: "number"
+                            description: "Степень загрязненности Тип DS"
+                          dirty_type_ds_max: 
+                            type: "number"
+                            description: "Максимальное значение степени загрязненности Тип DS"
+                          rolls: 
+                            type: "object"
+                            description: "Рулоны (в качестве ключа - идентификатор рулона)"
+                            additionalProperties: 
+                              type: "object"
+                              required: 
+                                - "id"
+                                - "number"
+                              properties: 
+                                id: 
+                                  type: "integer"
+                                  description: "Идентификатор рулона"
+                                serial_number: 
+                                  type: "integer"
+                                  description: "Порядковый номер"
+                                number: 
+                                  type: "string"
+                                  description: "Номер рулона"
+                                wall_thickness_id: 
+                                  type: "integer"
+                                  description: "Идентификатор толщины стенки"
+                                wall_thickness_info: 
+                                  type: "object"
+                                  description: "Параметры толщины стенки"
+                                  properties: 
+                                    theoretical_mass: 
+                                      type: "number"
+                                      description: "Теоретическая масса 1 м"
+                                    test_pressure: 
+                                      type: "number"
+                                      description: "Минимальное испытательное давление"
+                                    strength_min: 
+                                      type: "number"
+                                      description: "Минимальное значение предела прочности"
+                                    fluidity_min: 
+                                      type: "number"
+                                      description: "Минимальное значение предела текучести"
+                                    fluidity_max: 
+                                      type: "number"
+                                      description: "Максимальное значение предела текучести"
+                                    relative_extension_min: 
+                                      type: "number"
+                                      description: "Минимальное значение относительного удлинения"
+                                    absorbed_energy_1_min: 
+                                      type: "number"
+                                      description: "Минимальное значение поглощенной энергии образец 1"
+                                    absorbed_energy_2_min: 
+                                      type: "number"
+                                      description: "Минимальное значение поглощенной энергии образец 2"
+                                    absorbed_energy_3_min: 
+                                      type: "number"
+                                      description: "Минимальное значение поглощенной энергии образец 3"
+                                length: 
+                                  type: "number"
+                                  description: "Длина рулона"
+                                location_seams: 
+                                  type: "number"
+                                  description: "Расположения поперечных швов"
+                                location_seams_note: 
+                                  type: "string"
+                                  description: "Сноска для расположения поперечных швов"
+                                grain_size: 
+                                  type: "number"
+                                  description: "Размер зерна"
+                                grain_size_max: 
+                                  type: "number"
+                                  description: "Максимальный размер зерна"
+                                hardness_note: 
+                                  type: "string"
+                                  description: "Сноска для твердости"
+                                is_exact_hardness_om: 
+                                  type: "boolean"
+                                  description: "Точное или нет значение твердтости OM"
+                                hardness_om: 
+                                  type: "number"
+                                  description: "Твердтость OM"
+                                hardness_om_max: 
+                                  type: "number"
+                                  description: "Максимальная твердтость OM"
+                                is_exact_hardness_ssh: 
+                                  type: "boolean"
+                                  description: "Точное или нет значение твердтости СШ"
+                                hardness_ssh: 
+                                  type: "number"
+                                  description: "Твердтость СШ"
+                                hardness_ssh_max: 
+                                  type: "number"
+                                  description: "Максимальная твердтость СШ"
+                                is_exact_hardness_ztv: 
+                                  type: "boolean"
+                                  description: "Точное или нет значение твердтости ЗТВ"
+                                hardness_ztv: 
+                                  type: "number"
+                                  description: "Твердтость ЗТВ"
+                                hardness_ztv_max: 
+                                  type: "number"
+                                  description: "Максимальная твердтость ЗТВ"
+                                is_use_note: 
+                                  type: "boolean"
+                                  description: "Использовать сноску"
+                                is_fill_testing: 
+                                  type: "boolean"
+                                  description: "Заполнены результаты тестирования"
+                                absorbed_energy_1: 
+                                  type: "number"
+                                  description: "Поглощенная энергия образец 1"
+                                absorbed_energy_2: 
+                                  type: "number"
+                                  description: "Поглощенная энергия образец 2"
+                                absorbed_energy_3: 
+                                  type: "number"
+                                  description: "Поглощенная энергия образец 3"
+                                fluidity: 
+                                  type: "number"
+                                  description: "Предел текучести"
+                                fluidity_note: 
+                                  type: "string"
+                                  description: "Сноска для предела текучести"
+                                strength: 
+                                  type: "number"
+                                  description: "Предел прочности"
+                                relative_extension: 
+                                  type: "number"
+                                  description: "Относительное удлинение"
+                                relative_extension_note: 
+                                  type: "string"
+                                  description: "Сноска для относительного удлинения"
+                cylinderStep: 
+                  type: "object"
+                  properties: 
+                    material: 
+                      type: "string"
+                      description: "Материал"
+                    weight: 
+                      type: "number"
+                      description: "Масса"
+                    diameter_core: 
+                      type: "number"
+                      description: "Диаметр сердечника"
+                    diameter_cheek: 
+                      type: "number"
+                      description: "Диаметр щек"
+                    width: 
+                      type: "number"
+                      description: "Ширина"
+                    mark_nitrogen: 
+                      type: "string"
+                      description: "Отметка о заполнении азотом"
+                notesStep: 
+                  type: "object"
+                  additionalProperties: 
+                    type: "object"
+                    required: 
+                      - "id"
+                    properties: 
+                      id: 
+                        type: "integer"
+                        description: "Идентификатор примечания"
+                      text: 
+                        type: "string"
+                        description: "Текст примечания"
+                signaturesStep: 
+                  type: "object"
+                  additionalProperties: 
+                    type: "object"
+                    required: 
+                      - "id"
+                    properties: 
+                      id: 
+                        type: "integer"
+                        description: "Идентификатор подписи"
+                      name: 
+                        type: "string"
+                        description: "ФИО"
+                      position: 
+                        type: "string"
+                        description: "Должность"
+  definitions: 
+    CommonRequestError: 
+      type: "object"
+      description: "Возвращается в случае ошибки с соответсвующим http кодом: \n400 - ошибка входных данных, \n401 - требуется авторизация,\n403 - действие запрещено,\n404 - объект или метод не найден,\n500 - недокументированная ошибка.\n"
+      required: 
+        - "message"
+      properties: 
+        message: 
+          type: "string"
+          description: "Сообщение об ошибке. Может быть null."
+        errors: 
+          type: "object"
+          description: "Возвращается при ошибках валидации полей. \nСтруктура соответсвует структуре запроса. \nМожет отсутствовать."
+  components: 
+    parameters: 
+      PerPage: 
+        name: "per-page"
+        in: "query"
+        type: "integer"
+        required: false
+        description: "Количество элементов на страницу"
+      Page: 
+        name: "page"
+        in: "query"
+        type: "integer"
+        required: false
+        description: "Номер страницы"
+      Sort: 
+        name: "sort"
+        in: "query"
+        type: "string"
+        required: false
+        description: "Cписок полей для сортировки, через ',' (sort={filed1},-{field2})"

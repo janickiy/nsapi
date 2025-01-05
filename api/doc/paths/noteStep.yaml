@@ -1,0 +1,93 @@
+/certificate/{idCertificate}/note:
+  get:
+    tags:
+      - View Certificate
+    summary: Notes
+    description: Сохраненные примечания
+    operationId: notes
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          type: object
+          additionalProperties:
+            $ref: '../definitions/certificateModels/NoteModel.yaml'
+  post:
+    tags:
+      - Create/Edit Certificate
+    summary: CreateNote
+    description: Добавление примечания
+    operationId: create_note
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: integer
+              description: Идентификатор примечания
+  put:
+    tags:
+      - Create/Edit Certificate
+    summary: NotesUpdate
+    description: Сохранение примечания
+    operationId: notes_update
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          additionalProperties:
+            $ref: '../definitions/requestModels/NoteRequest.yaml'
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+
+/certificate/{idCertificate}/note/{idNote}:
+  delete:
+    tags:
+      - Create/Edit Certificate
+    summary: DeleteNote
+    description: Удаление примечания
+    operationId: delete_note
+    produces:
+      - application/json
+    parameters:
+      - in: path
+        name: idCertificate
+        description: Идентификатор сертификата
+        type: integer
+        required: true
+      - in: path
+        name: idNote
+        description: Идентификатор примечания
+        type: integer
+        required: true
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'

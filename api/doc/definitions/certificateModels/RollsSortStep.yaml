@@ -1,0 +1,17 @@
+type: array
+items:
+  type: object
+  required:
+    - id
+    - number
+    - serial_number
+  properties:
+    id:
+      type: integer
+      description: Идентификатор рулона
+    serial_number:
+      type: integer
+      description: Порядковый номер
+    number:
+      type: string
+      description: Номер рулона

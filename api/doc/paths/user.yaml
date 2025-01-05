@@ -1,0 +1,107 @@
+/auth/signin:
+  post:
+    tags:
+      - User
+    summary: Signin
+    description: Авторизация пользователя
+    operationId: signin
+    produces:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - email
+            - password
+          properties:
+            email:
+              type: string
+            password:
+              type: string
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+/auth/logout:
+  post:
+    tags:
+      - User
+    summary: Logout
+    description: Сброс авторизации
+    operationId: logout
+    produces:
+      - application/json
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
+/user:
+  get:
+    tags:
+      - User
+    summary: UserInfo
+    description: Информация о пользователе
+    operationId: userInfo
+    produces:
+      - application/json
+    responses:
+      '200':
+        schema:
+          type: object
+          required:
+            - id
+            - email
+            - role
+          properties:
+            id:
+              type: integer
+            email:
+              description: Email
+              type: string
+            last_name:
+              description: Фамилия
+              type: string
+            first_name:
+              description: Имя
+              type: string
+            middle_name:
+              description: Отчество
+              type: string
+            role:
+              type: string
+              description: Роль пользователя [user - Сотрудник (может создавать сертификаты), moderator - Директор (может согласовывать сертификат), developer - Редактор справочников (может работать в админке и редактировать справочники), admin - Администратор (может создавать пользователей)]
+              enum: ['admin', 'developer', 'moderator', 'user']
+
+/user/change-password:
+  put:
+    tags:
+      - User
+    summary: ChangePassword
+    description: Смена пароля
+    operationId: change_password
+    produces:
+      - application/json
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+            - old_password
+            - new_password
+            - confirm_password
+          properties:
+            old_password:
+              description: Текущий пароль
+              type: string
+            new_password:
+              description: Новый пароль
+              type: string
+            confirm_password:
+              description: Подтверждение пароля
+              type: string
+    responses:
+      '200':
+        $ref: '../definitions/EmptyResponse.yaml'
